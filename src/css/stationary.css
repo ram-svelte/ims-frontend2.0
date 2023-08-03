@@ -1,0 +1,103 @@
+.stat {
+  background-color: #fff;
+}
+
+@media screen and (max-width: 1530px) {
+  .stationr {
+    width: 80%;
+  }
+}
+
+.stationr {
+  width: 70%;
+}
+
+.stat-prod {
+  width: 23%;
+  margin: 0px 2% 4% 0;
+  box-shadow: 0px 0px 16px rgb(0 0 0 / 8%);
+}
+
+.stat-prod-inner {
+  border-radius: 8px;
+  padding-top: 5%;
+  flex-direction: column;
+  position: relative;
+  min-height: 155px;
+  /* background-color: #EFF5FC; */
+  text-align: center;
+  min-width: 185px;
+}
+
+/* Child Text Container */
+.stat-prod-inner div {
+  position: absolute;
+  bottom: 0;
+  background: #337ed7;
+  color: white;
+  margin-bottom: 5px;
+  font-family: sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: visibility 0s, opacity 0.5s linear;
+  transition: visibility 0s, opacity 0.5s linear;
+  width: 100%;
+}
+
+/* Hover on Parent Container */
+.stat-prod-inner:hover {
+  cursor: pointer;
+}
+
+.stat-prod-inner:hover div {
+  padding: 5px 5px;
+  visibility: visible;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.stat-imgsize {
+  max-width: 98%;
+  max-height: 140px;
+}
+
+.stat-txt {
+  font-size: 17px;
+  font-weight: 600;
+  padding-left: 0.5rem;
+  margin-top: 0rem !important;
+}
+/* Not used */
+.crrd {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* word-wrap: break-word; */
+  background-color: #fff;
+  background-clip: border-box;
+  /* border: 1px solid rgba(0,0,0,.125); */
+  /* border-radius: 0.25rem; */
+}
+
+.out-stock {
+  color: red;
+}
+.add-cart {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem;
+}
+
+.add-cart input {
+  width: 44%;
+  float: left;
+  padding: 0px 0px 0px 5px !important;
+}
+
+.add-cart button {
+  width: 50%;
+  float: right;
+  background-color: #337ed7 !important;
+  padding: 0px !important;
+}

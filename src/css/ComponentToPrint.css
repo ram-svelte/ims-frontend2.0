@@ -1,0 +1,17 @@
+.order_heading {
+  display: none;
+}
+.order_number {
+  font-weight: bold;
+}
+@media print {
+  .order_heading {
+    display: block;
+  }
+  .order_accordian_body {
+    background-color: white;
+  }
+  p {
+    font-weight: bold;
+  }
+}

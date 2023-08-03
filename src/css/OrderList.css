@@ -1,0 +1,15 @@
+.order_image {
+  width: 75px;
+  height: 75px;
+  margin-left: 1rem;
+  object-fit: contain;
+}
+.order_description {
+  display: flex;
+  justify-content: center;
+}
+
+.order_title {
+  width: 120px;
+  word-break: break-all;
+}

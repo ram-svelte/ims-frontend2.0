@@ -1,0 +1,50 @@
+.handleover_container {
+  margin-bottom: 1rem;
+}
+
+.handleover_container label {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  margin-top: 5px;
+  font-weight: bold;
+  /* margin-right: 1rem; */
+  /* float: right; */
+}
+
+.handleover_container button {
+  background-color: #337ed7;
+  margin-right: 1rem;
+}
+
+.handleover_container input {
+  margin-right: 0.5rem;
+  /* width: 15%;
+  height: 2rem; */
+}
+.surrender{
+    margin-bottom: 1rem;
+}
+
+
+.surrender button {
+  background-color: #ba6c6e !important;
+  border: none;
+  margin-right: 10px;
+  
+}
+
+.surrender button:hover{
+  background-color: #c3696c !important;
+}
+
+.surrender label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.allocation_edit_container button {
+  background-color: #337ed7;
+}
+.allocation_submit_container button {
+  background-color: #337ed7;
+}

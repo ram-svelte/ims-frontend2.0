@@ -1,0 +1,23 @@
+.backLoginForm {
+    display: flex;
+    justify-content: center;
+  }
+  .mailbox {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+  }
+  .inventory {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+  }
+  .back-arrow {
+    margin: auto;
+    font-size: 29px;
+    margin-top: 2rem;
+  }

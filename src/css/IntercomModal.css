@@ -1,0 +1,45 @@
+.yes_button {
+  background-color: #337ed7;
+}
+.intercom_input {
+  width: 50%;
+  padding: 3px;
+}
+.requirement_text_area textarea {
+  width: 98%;
+}
+.requirement_text_area_checkbox {
+  width: 365px;
+  display: inline-table;
+  margin: 10px 10px;
+}
+.requirement_text_area_branch {
+  width: 235px;
+  display: inline-table;
+  margin: 10px 10px;
+}
+.checkbox{
+    display: inline-table;
+    height: 20px;
+    width: 20px;
+}
+.intercom_text input {
+  width: 98%;
+}
+.requirement_heading {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+.intercom_heading {
+  font-weight: bold;
+}
+.IRLA_Input{
+    display: inline-table;
+    /* float: right; */
+    margin: 31px 100px 0px 0px;
+}
+.IRLA_heading{
+  margin-top: 1rem;
+  font-weight: bold;
+  margin: 0px 10px 2px 0px;
+}

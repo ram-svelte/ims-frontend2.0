@@ -1,0 +1,9 @@
+export const COMPUTERS = "Computers & Peripherals";
+export const ELECTRICALS = "Electricals";
+export const FURNITURE = "Furniture"
+export const OTHERCOMP = "Operational Computers"
+export const MISCAP = "Misc. (Capital Goods)";
+export const DESKTOP = "Desktop Computer"; // For desktop title
+export const CPU = "CPU";
+export const MONITOR = "Monitor";
+export const TYPE = "Desktop"; // For orderType or prodType

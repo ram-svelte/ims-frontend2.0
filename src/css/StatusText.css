@@ -1,0 +1,32 @@
+.status_Pending {
+  background-color: #ff944d;
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: auto;
+}
+
+.status_Rejected {
+  background-color: #fc0303;
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: auto;
+  color: #fff;
+}
+
+.status_Approved {
+  background-color: #66cc66;
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: auto;
+}
+
+.status_Delivered {
+  background-color: #bab86c;
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: auto;
+}
+
+.status_Partially_Approved{
+
+}

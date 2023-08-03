@@ -1,0 +1,20 @@
+.map_serial_no .serial_no {
+    margin-right: 0.5rem;
+}
+
+.map_serial_no .employee_id {
+    margin-right: 0.5rem;
+}
+
+.map_serial_no .serial_no_input {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.map_serial_no .employee_id_input {
+    margin-right: 1rem;
+    padding: 0.2rem;
+}
+.mapping_serialno_form{
+    text-align: center;
+}

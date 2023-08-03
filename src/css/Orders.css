@@ -1,0 +1,88 @@
+.order_container {
+  margin-top: 3rem;
+}
+.order_accordian {
+  background-color: #eff5fc;
+  margin-top: 0.5rem;
+}
+.order_accordian {
+  background-color: #eff5fc;
+}
+
+.order_accordian_body {
+  background-color: #eff5fc;
+  border-radius: 0 0 10px 10px;
+}
+.order_accordian_item {
+  border: 0px none;
+}
+
+.order_accordian_button button {
+  background-color: #eff5fc;
+
+  /* border-radius: 22px; */
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+  border-radius: 10px;
+  z-index: 2;
+}
+.order_length {
+  background-color: #337ed7;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  margin-right: 1.5rem;
+}
+.status {
+  margin-left: auto;
+}
+.accordion-item:first-of-type .accordion-button {
+  border-radius: 10px 10px 0 0;
+}
+.accordion-button:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.accordion-button:not(.collapsed) {
+  color: inherit;
+  border-radius: 10px 10px 0 0;
+}
+
+.time_slot {
+  margin-left: 2rem;
+  font-weight: bold;
+}
+
+.print_button {
+  background-color: #337ed7;
+  position: relative;
+  float: right;
+  /* right: -10rem; */
+  top: -3.5rem;
+  margin-right: 3rem;
+  margin-bottom: -3.5rem;
+  z-index: 1;
+  display: block;
+}
+
+.cancel_order_button{
+  background-color: #ba6c6e;
+  position: relative; 
+ /* float: right; */
+  /* right: -58rem; */
+  top: -3.5rem;
+  margin-left: 37rem;
+  margin-bottom: -2.5rem;
+  z-index: 1;
+  display: block;
+  border-color:#ba6c6e;
+}
+
+.cancel_order_button:hover{
+  background-color: #ba6c6e;
+}
