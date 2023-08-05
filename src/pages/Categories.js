@@ -8,6 +8,7 @@ import { BASE_URL } from "../Urls";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { useDispatch } from "react-redux";
 import { currentPath } from "../redux/action";
+import './index.css'
 
 function Categories() {
   const [items, setItems] = useState([]);
@@ -65,13 +66,7 @@ function Categories() {
       ) : (
         <>
           <NavigationBar />
-          <div className="container-fluid categor">
-            <div className="cat-head text-center"> Categories </div>
-            <h6 style={{ color: "red", textAlign: "center" }}>
-              Note : You can place order of a particular category maximum twice
-              a month
-            </h6>
-            {/* <PageTitle title="Categories" /> */}
+          <div style={{background:"#0083B7",height:'100vh'}} className="container-fluid categor">
             {isLoading ? (
               <>
                 <div className=" d-flex justify-content-center loading_spinner ">
@@ -80,6 +75,12 @@ function Categories() {
               </>
             ) : (
               <>
+
+              <div>
+                <div></div>
+              </div>
+
+            <div className="heading-cate"> Categories </div>
                 <div className="main_content">{categoryItems}</div>
               </>
             )}

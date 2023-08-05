@@ -134,7 +134,7 @@ function Login(props) {
 
           <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
             <div className="welcome">
-              <h2 className="mb-4"> Welcome to e-Stores </h2>
+              <h2 className="mb-4"> Welcome To Asset Management </h2>
               <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                 <LoginForm onFlip={handleFlip} onLogin={props.onLogin} />
                 <BackLoginForm onLogin={props.onLogin} onFlip={handleFlip} />

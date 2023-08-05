@@ -132,7 +132,10 @@ function App() {
   }
 
   return (
-    <>
+    <div className="App">
+    {/* <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1> */}
       <div style={BUTTON_WRAPPER_STYLES}>
         <LogoutModal open={isOpen} onClose={logoutOnClose} />
       </div>
@@ -161,7 +164,7 @@ function App() {
           </AuthContext.Provider>
         </Auth>
       </div>
-    </>
+    </div>
   );
 }
 

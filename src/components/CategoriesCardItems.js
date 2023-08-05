@@ -1,22 +1,17 @@
-import { Link } from "react-router-dom";
+/** @format */
 
-const CardItems = (props) => {
-  return (
-    <div className="cat-prod text-center">
-      <Link
-        // style={
-        //   props.title.toLowerCase() == "stationary" ||
-        //   props.title.toLowerCase() == "misc."
-        //     ? null
-        //     : { pointerEvents: "none" }
-        // }
-        to={`/categories/${props.id}/${props.title}`}
-      >
-        <img alt="AltText" src={props.image} className="cat-imgsize" />
-      </Link>
-      <div className="cat-txt my-3">{props.title}</div>
-    </div>
-  );
+import { Link } from 'react-router-dom';
+
+const CardItems = ({title,image}) => {
+	// console.log(props,'props');
+	return(
+	<div style={{borderRadius:"5px",cursor:"pointer"}} className='card-head'>
+	<div style={{borderRadius:"5px"}}>
+		<img width={200} height={200} src={false?image:"lap.jpg"}/>
+	</div>
+	<div style={{background: "#212121",color:"white",textAlign:"center",padding:"3px"}} className='card-title'>{title}</div>
+	</div>
+	);
 };
 
 export default CardItems;
