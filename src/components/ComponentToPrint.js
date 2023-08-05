@@ -8,9 +8,9 @@ const ComponentToPrint = forwardRef((props, ref) => {
   return (
     <>
       <div>
-        <Accordion className="order_accordian" key={item.id}>
-          <Accordion.Item className="order_accordian_item" eventKey={item.id}>
-            <Accordion.Header className="order_accordian_button shadow-none">
+        <Accordion style={{background:"black"}} className="order_accordian" key={item.id}>
+          <Accordion.Item style={{background:"black"}} className="order_accordian_item" eventKey={item.id}>
+            <Accordion.Header style={{background:"black"}} className="order_accordian_button shadow-none">
               <span className="order_length"> {item.products.length} </span>
               <span className="order_number">Order No: {item.id}</span>
               {/* <span className="status">{item.status}</span> */}

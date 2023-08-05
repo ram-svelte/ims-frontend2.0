@@ -32,7 +32,7 @@
   -moz-box-shadow: 0 10px 10px -10px #808080;
   box-shadow: 0 10px 10px -10px #b1b5b8;
   height: 6.9rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   justify-content:space-around !important ;
   }
 
@@ -137,6 +137,7 @@ nav-link:hover {
   color: #fff;
   padding-left: 10px;
   padding-right: 10px;
+  margin-left: -1rem;
 }
 
 .categ {
@@ -144,7 +145,7 @@ nav-link:hover {
 }
 
 .categor {
-  width: 60%;
+  /* width: 60%; */
 }
 
 .cat-txt {

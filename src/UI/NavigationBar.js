@@ -109,14 +109,11 @@ function NavigationBar() {
   };
   return (
     <>
-      <div className="d-flex flex-row navbar justify-content-between navbar-expand-lg  main_navbar">
-        <div className="logo_container d-flex align-self-start">
-          <NavLink to="/">
-            <span className="icon">
-              <img src="../../img/logo.png" alt="logo" />
-            </span>
-            <div className="icon_text">E-Store</div>
-          </NavLink>
+      <div className="d-flex flex-row navbar bg-black justify-content-between navbar-expand-lg  main_navbar">
+        <div  className="logo_container d-flex align-self-start mt-3">
+       
+            <div style={{width:"max-content"}}> <img src="../../img/logo.png" alt="logo" /></div>
+      
         </div>
 
         <div className="search_container">
@@ -129,7 +126,8 @@ function NavigationBar() {
                 <NavLink
                   to="/Categories"
                   activeClassName="link_selected"
-                  className="nav-link"
+                                    className="text-white"
+
                 >
                   Categories
                 </NavLink>
@@ -138,7 +136,8 @@ function NavigationBar() {
                 <NavLink
                   to="/Orders"
                   activeClassName="link_selected"
-                  className="nav-link"
+                                    className="text-white"
+
                 >
                   Orders
                 </NavLink>
@@ -147,7 +146,8 @@ function NavigationBar() {
                 <NavLink
                   to="/myassets"
                   activeClassName="link_selected"
-                  className="nav-link"
+                                    className="text-white"
+
                 >
                   My Assets
                 </NavLink>
@@ -156,7 +156,8 @@ function NavigationBar() {
                 <NavLink
                   to="/handoverassets"
                   activeClassName="link_selected"
-                  className="nav-link"
+                                    className="text-white"
+
                 >
                   Handing Over Assets
                 </NavLink>
@@ -165,7 +166,8 @@ function NavigationBar() {
                 <NavLink
                   to="/takingoverassets"
                   activeClassName="link_selected"
-                  className="nav-link"
+                                    className="text-white"
+
                 >
                   Taking Over Assets
                 </NavLink>
@@ -174,7 +176,7 @@ function NavigationBar() {
                 <NavLink
                   to="/surrenderedassets"
                   activeClassName="link_selected"
-                  className="nav-link"
+                  className="text-white"
                 >
                   Surrendered Assets
                 </NavLink>

@@ -107,3 +107,7 @@ a:active {
   border-color:none;
   box-shadow: none;
 }
+.dropdown-toggle{
+  width: 3rem;
+    height: 3rem;
+}

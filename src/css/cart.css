@@ -83,13 +83,18 @@
 
 .main_content {
   display: flex;
-  align-items: center;
-  position: relative;
+  /* align-items: center; */
+  /* position: relative; */
   height: 100%;
-  margin: 50px auto 0px auto;
+  /* margin: 50px auto 0px auto; */
   box-sizing: border-box;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  /* justify-content: flex-start; */
+  /* flex-wrap: wrap; */
+  /* margin: auto; */
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .success_order {
