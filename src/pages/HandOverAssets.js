@@ -13,6 +13,7 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 const HandOverAssets = () => {
   const { isLoading, error, sendRequest: fetchAssets } = useHttp();
@@ -190,6 +191,8 @@ const HandOverAssets = () => {
   return (
     <>
       <NavigationBar />
+      <div style={{display:"flex"}}>  <SideBar/> 
+      <div>
       <Container>
         <div className="container-fluid">
           <div
@@ -274,6 +277,7 @@ const HandOverAssets = () => {
           </>
         )}
       </Container>
+      </div></div>
     </>
   );
 };

@@ -20,6 +20,13 @@ code {
     monospace;
 }
 .accordion-item:last-of-type .accordion-button.collapsed {
-background: black;
+/* background: black; */
 } 
 
+.switch_dropdown .btn-success {
+  border-radius: 42px;
+  /* margin-right: 1rem; */
+  background-color: black;
+  border: none;
+  width: auto;
+}
