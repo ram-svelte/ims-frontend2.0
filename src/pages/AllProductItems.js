@@ -11,6 +11,7 @@ import queryString from "query-string";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 function AllProductItems() {
   const { search } = useLocation();
@@ -29,7 +30,7 @@ function AllProductItems() {
   const { isLoading, error, sendRequest: fetchProducts } = useHttp();
   const params = useParams();
   let limit = 16;
-  const access_token = localStorage.getItem('jwtToken');
+  const access_token = localStorage.getItem("jwtToken");
 
   //storing currentUrl to localStorage
   const currentUrl = window.location.href;
@@ -107,27 +108,36 @@ function AllProductItems() {
       ) : (
         <>
           <NavigationBar />
-          <div className="stat">
-            <div className="stationr container-fluid">
-              <div className="cat-head">{params.categoryTitle}</div>
-              {isLoading ? (
-                <>
-                  <div className=" d-flex justify-content-center loading_spinner ">
-                    <LoadingSpinner />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="main_content">{productList}</div>
-                  <div className="d-flex justify-content-center">
-                    <Pagination
-                      OnhandlePageClick={handlePageClick}
-                      pageCount={pageCount}
-                      pageNumber={currentPage - 1}
-                    />
-                  </div>
-                </>
-              )}
+
+          <div className="flex-box">
+            <SideBar />
+            <div className="stat">
+              <div className="stationr container-fluid">
+                <div className="cat-head">{params.categoryTitle}</div>
+                {isLoading ? (
+                  <>
+                    <div className=" d-flex justify-content-center loading_spinner ">
+                      <LoadingSpinner />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="main_content-product-list">
+                      {productList}
+                    </div>
+                    <div
+                      className="d-flex justify-content-center"
+                      style={{ marginTop: "5rem" }}
+                    >
+                      <Pagination
+                        OnhandlePageClick={handlePageClick}
+                        pageCount={pageCount}
+                        pageNumber={currentPage - 1}
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </>

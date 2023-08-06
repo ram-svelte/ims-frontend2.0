@@ -7,6 +7,7 @@ import ProductDetailsList from "../components/ProductDetailsList";
 import NavigationBar from "../UI/NavigationBar";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 function ProductDetails() {
   const [items, setItems] = useState([]);
@@ -69,14 +70,17 @@ function ProductDetails() {
   return (
     <>
       <NavigationBar />
-      <div
-        style={{
-          background: "rgb(0, 131, 183)",
-          height: "100vh",
-          // marginTop: "-14px",
-        }}
-      >
-        <div>{productItems}</div>
+      <div className="flex-box">
+        <SideBar />
+        <div
+          style={{
+            background: "rgb(0, 131, 183)",
+            height: "100vh",
+            width: "100%",
+          }}
+        >
+          <div>{productItems}</div>
+        </div>
       </div>
     </>
   );

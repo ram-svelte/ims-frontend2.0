@@ -109,7 +109,8 @@
 width: 25rem;
 
     height: 25rem;
-    object-fit: cover;}
+    /* object-fit: cover; */
+  }
 
   .footer-product{
     width: 25%;
@@ -136,4 +137,5 @@ margin-left: 10px;
       background: #0083B7;
       height: 2rem;
       padding: 2px;
+      width: 6rem;
     }

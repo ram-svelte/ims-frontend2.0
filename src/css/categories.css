@@ -191,13 +191,14 @@ nav-link:hover {
   min-height: 175px;
 }
 
-.main_content {
+.main_content-product-list {
   display: flex;
   align-items: center;
   position: relative;
   height: 100%;
-  margin: 50px auto 0px auto;
+  /* margin: 5px auto 0px auto; */
   box-sizing: border-box;
   justify-content: flex-start;
   flex-wrap: wrap;
+  gap: 28px;;
 }

@@ -185,7 +185,7 @@ function NavigationBar() {
         <div className="switch_dropdown" style={{ marginBottom: 30 }}>
           <Dropdown>
             <Dropdown.Toggle
-              // className="profile_icon"
+              className="profile_icon"
               variant="success"
               id="dropdown-basic"
             >

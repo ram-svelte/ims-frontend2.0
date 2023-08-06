@@ -10,14 +10,15 @@
     margin-top: 2rem;
 }
 .text-content{
-margin-left: 6rem;
-margin-top: 4rem;
+    width: 16rem;
+    margin: auto;
+    margin-top: 4rem;
 }
 .divider{
     border-bottom: 2px solid white;
     margin: 2rem;
 }
-.btn{
+.btn1{
     background: #0083B7  ;
     /* padding: 1rem 3rem; */
     color: white;
