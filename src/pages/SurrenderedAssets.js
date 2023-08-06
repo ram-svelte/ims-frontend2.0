@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import SurrenderedAssetsList from "../components/SurrenderedAssetsList";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 const SurrenderedAssets = () => {
   const { isLoading, error, sendRequest: fetchAssets } = useHttp();
@@ -166,6 +167,8 @@ const SurrenderedAssets = () => {
   return (
     <>
       <NavigationBar />
+      <div style={{display:"flex"}}>  <SideBar/> 
+      <div>
       <Container>
         <div className="container-fluid">
           <div
@@ -250,6 +253,7 @@ const SurrenderedAssets = () => {
           </>
         )}
       </Container>
+      </div></div>
     </>
   );
 };

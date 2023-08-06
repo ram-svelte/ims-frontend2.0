@@ -54,10 +54,13 @@ a:active {
 }
 
 .custom_dropdown .btn-success{
-  border-radius: 42px;
+  /* border-radius: 42px; */
   /* margin-right: 1rem; */
-  background-color: #337ed7;
-  border-color: none;
+  background-color: black;
+  /* border-color: none; */
+  color: white;
+  border: none;
+  width: auto;
 
 }
 
@@ -85,8 +88,10 @@ a:active {
 .switch_dropdown .btn-success{
   border-radius: 42px;
   /* margin-right: 1rem; */
-  background-color:#FFFFFF;
+  background-color:black;
   border: none;
+  color: white;
+  width: auto;
 
 }
 

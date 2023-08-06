@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 const TakingOverAssets = () => {
   const { isLoading, error, sendRequest: fetchAssets } = useHttp();
@@ -186,6 +187,8 @@ const TakingOverAssets = () => {
   return (
     <>
       <NavigationBar />
+      <div style={{display:"flex"}}>  <SideBar/> 
+      <div>
       <Container>
         <div className="container-fluid">
           <div
@@ -275,6 +278,7 @@ const TakingOverAssets = () => {
           </>
         )}
       </Container>
+      </div></div>
     </>
   );
 };
