@@ -120,7 +120,16 @@ function ProductList(props) {
       } catch (err) {}
     }
   };
-
+  const incrementCount = async () => {
+    if (counter > 0) {
+      setCounter(counter + 1);
+    }
+  };
+  const decreaseCounter = async () => {
+    if (counter > 1) {
+      setCounter(counter - 1);
+    }
+  };
   return (
     // <div key={props.id} className="stat-prod">
     //   {/* only for opening product detail page of computeres and hovering of stationary  */}
@@ -187,7 +196,7 @@ function ProductList(props) {
             style={catTitle === "stationary" ? { pointerEvents: "none" } : null}
             to={`/product/${catId}/${props.id}`}
           >
-            <img className="" src="/lap.jpg" />
+            <img className="" src={props.imageSrc} />
           </Link>
         </div>
         <>
@@ -215,7 +224,7 @@ function ProductList(props) {
                   }}
                   className="dec-cart"
                   icon={faMinusCircle}
-                  // onClick={decreaseCounter}
+                  onClick={decreaseCounter}
                 />
               </div>
 
@@ -240,10 +249,10 @@ function ProductList(props) {
                   }}
                   className="inc-cart"
                   icon={faPlusCircle}
-                  // onClick={incrementCount}
+                  onClick={incrementCount}
                 />
               </div>
-              <div style={{ marginTop: "4px", marginLeft: "16px" }}>
+              <div style={{ marginTop: "4px", marginLeft: "10px" }}>
                 <button
                   className="btn btn-primary add-to-cart-btn mt-0"
                   onClick={addProduct}
