@@ -87,6 +87,8 @@ function LoginForm(props) {
 					if (response.status === 200) {
 						if (response.data.data.length !== 0) {
 							const role = response.data.data[0].role;
+              localStorage.setItem('user_type',response?.data?.data[0]?.user_type)
+              localStorage.setItem('role',role)
 							if (role === 1 || role === 3 || role === 4) {
 								props.onLogin();
 								setLoading(true);

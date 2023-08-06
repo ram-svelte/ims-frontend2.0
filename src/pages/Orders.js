@@ -26,6 +26,7 @@ import {
 } from "../Constant";
 import { useDispatch } from "react-redux";
 import { currentPath } from "../redux/action";
+import SideBar from "../UI/sideBar";
 
 function Orders() {
   const ref = useRef([]);
@@ -285,6 +286,9 @@ function Orders() {
       ) : (
         <>
           <NavigationBar />
+          <div style={{display:"flex",flexDirection:"column"}}>
+      <SideBar/>
+     <div>
           <Container>
             <div className="container-fluid">
               <div className="cat-head text-center">Orders</div>
@@ -315,6 +319,8 @@ function Orders() {
               finalOrder={finalOrder}
             />
           </Container>
+          </div>
+          </div>
         </>
       )}
     </>

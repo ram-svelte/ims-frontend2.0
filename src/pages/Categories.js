@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { currentPath } from '../redux/action';
 import { Carousel } from 'react-responsive-carousel';
 import './index.css';
+import SideBar from '../UI/sideBar';
 
 function Categories() {
 	const [items, setItems] = useState([]);
@@ -86,7 +87,10 @@ function Categories() {
 			) : (
 				<>
 					<NavigationBar />
-					<div
+         
+          <div className='flex-box'>
+          <SideBar/>
+          <div
 						style={{ background: '#0083B7', height: '100vh' }}
 						className='container-fluid categor'
 					>
@@ -132,6 +136,8 @@ function Categories() {
 							</>
 						)}
 					</div>
+          </div>
+				
 				</>
 			)}
 		</>

@@ -1,0 +1,35 @@
+.main{
+    background: black;
+    width: 25%;
+    height: 100vh;
+    color: white;font-size: 1.2rem;
+}
+.profile-image{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.text-content{
+margin-left: 6rem;
+margin-top: 4rem;
+}
+.divider{
+    border-bottom: 2px solid white;
+    margin: 2rem;
+}
+.btn{
+    background: #0083B7  ;
+    padding: 1rem 3rem;
+    color: white;
+width: 16rem;
+font-size: 1.3rem;
+font-weight: 700;
+cursor: pointer;
+}
+.btn-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1;
+    margin-top: 6rem;
+    align-items: center;
+}
