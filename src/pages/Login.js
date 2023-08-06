@@ -123,26 +123,33 @@ function Login(props) {
   }, [token]);
 
   return !token ? (
-    <div className="home">
+    <div style={{overflow:"hidden"}}>
+  
+    <div style={{background:"white",height:"100vh"}} className="home">
+    <div  style={{background:"black",height:"80px",width:"100%"}}>
+      <img style={{margin:"25px",marginLeft:"80px"}} src="/img/logo.png"/>
+    </div>
       <div className="container-fluid">
-        <div className="row home-main">
-          <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
-            <div className="row px-3 mt-4 border-line">
-              <img src="img/home-store.png" />
-            </div>
+        <div className=" home-main">
+          <div  className="col-lg-6 col-md-6 col-sm-6 mb-4">
+            {/* <div className="d-absolute  mt-4 border-line"> */}
+              <img style={{bottom:"150",position:"absolute",width:"950px",height:"400",marginLeft:"-10px",bottom:"0"}} src="img/bg.png" />
+            {/* </div> */}
           </div>
 
-          <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
-            <div className="welcome">
-              <h2 className="mb-4"> Welcome To Asset Management </h2>
-              <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+          <div style={{background:"#0083B7",height:"100vh",margin:"auto",paddingTop:"15%",marginRight:"-20px"}} className="col-lg-6 col-md-6 col-sm-6 ">
+            {/* <div> */}
+              {/* <h2 className="mb-4"> Welcome To Asset Management </h2> */}
+              {/* <ReactCardFlip sty isFlipped={isFlipped} flipDirection="horizontal"> */}
+              {/* <div > */}
                 <LoginForm onFlip={handleFlip} onLogin={props.onLogin} />
-                <BackLoginForm onLogin={props.onLogin} onFlip={handleFlip} />
-              </ReactCardFlip>
-            </div>
+             
+              {/* </div> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
+    </div>
     </div>
   ) : (
     <div

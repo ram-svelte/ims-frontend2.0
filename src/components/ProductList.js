@@ -137,11 +137,12 @@ function ProductList(props) {
       </div> */}
 
       <div className={`non_hover_img__wrap`}>
+      <p className="img__description">{props.description}</p>
+
         <Link to={`/product/${catId}/${props.id}`}>
-          <img className="img__img" src={props.imageSrc} />
+          <img className="img__img" src='/lap.jpg' />
         </Link>
 
-        <p className="img__description">{props.description}</p>
       </div>
       <>
         <CartModal
