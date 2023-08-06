@@ -132,41 +132,69 @@ function CartList(props) {
 
   return (
     <div key={props.id} className="cart-prod">
+      <div className="cart-txt my-3">{props.title}</div>
       <div className="cart-prod-inner">
         <img alt="AltText" src={props.imageSrc} className="cart-imgsize" />
       </div>
       <div className="order-cart">
-        <div className="cart-txt my-3">{props.title}</div>
-        <div className="cart-input my-3">
-          <FontAwesomeIcon
-            style={{ color: "#337ED7", cursor:"pointer"}}
-            className="dec-cart"
-            icon={faMinusCircle}
-            onClick={decreaseCounter}
-          />
-          <input
-            type="number"
-            value={count}
-            className="form-control"
-            onChange={handlingCart}
-            disabled
-          ></input>
-          <FontAwesomeIcon
-            style={{ color: "#337ED7", cursor: "pointer" }}
-            className="inc-cart"
-            icon={faPlusCircle}
-            onClick={incrementCount}
-          />
+        {/* <div className="cart-input my-3"> */}
+        <div className="add-to-cart-final align-items-center justify-content-center d-flex gap-5">
+          <div className="d-flex flex-row align-item-center gap-2">
+            <div style={{ marginRight: "-5px", marginTop: "1px" }}>
+              <FontAwesomeIcon
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  marginTop: "5px",
+                }}
+                className="dec-cart"
+                icon={faMinusCircle}
+                onClick={decreaseCounter}
+              />
+            </div>
+            <div className="" style={{ width: "5rem", marginTop: "2px" }}>
+              <input
+                type="number"
+                className="form-control p-1"
+                style={{ marginTop: "2px", width: "4rem" }}
+                value={count}
+                onChange={handlingCart}
+                disabled
+              ></input>
+            </div>
+            <div style={{ marginLeft: "-18px", marginTop: "1px" }}>
+              <FontAwesomeIcon
+                style={{
+                  color: "white",
+                  cursor: "pointer",
+                  marginTop: "5px",
+                }}
+                className="inc-cart"
+                icon={faPlusCircle}
+                onClick={incrementCount}
+              />
+            </div>
+          </div>
+          <div style={{ marginTop: "", marginLeft: "" }}>
+            <button
+              className="btn btn-primary add-to-cart-btn-final mt-0"
+              onClick={deleteItem}
+              type="submit"
+            >
+              <span style={{ fontSize: "14px" }}>Delete</span>
+            </button>
+          </div>
+          {/* </div> */}
         </div>
       </div>
 
-      <button
+      {/* <button
         className="btn btn-primary order-btn"
         onClick={deleteItem}
         type="submit"
       >
         Delete
-      </button>
+      </button> */}
     </div>
   );
 }

@@ -13,6 +13,7 @@ import { fetchAllCompProds } from "../redux/action";
 
 import IntercomModal from "../UI/IntercomModal";
 import { CPU, DESKTOP, MONITOR, TYPE } from "../Constant";
+import SideBar from "../UI/sideBar";
 
 function Cart() {
   const history = useHistory();
@@ -234,31 +235,36 @@ function Cart() {
   return (
     <>
       <NavigationBar />
-      <div className="cart container-fluid">
-        <div className="cart-head text-center"> Your Cart </div>
-        <div className="cart-head-2">"{cartLength} Products in your Cart"</div>
-        <div className="place-ord-row">
-          {showBtn && (
-            <button
-              className="btn btn-primary place-ord-btn"
-              onClick={() => {
-                addOrder("---", 0, "");
-              }}
-              type="submit"
-            >
-              Place Order
-            </button>
-          )}
+      <div className="flex-box">
+        <SideBar />
+        <div className="cart container-fluid">
+          <div className="cart-head text-center"> Your Cart </div>
+          <div className="cart-head-2">
+            "{cartLength} Products in your Cart"
+          </div>
+          <div className="place-ord-row">
+            {showBtn && (
+              <button
+                className="btn btn-primary place-ord-btn"
+                onClick={() => {
+                  addOrder("---", 0, "");
+                }}
+                type="submit"
+              >
+                Place Order
+              </button>
+            )}
+          </div>
+          {console.log(radioSelect, "selected")}
+          <div className="main_content">{CartItems()}</div>
+          <IntercomModal
+            cartTitle={cart_title}
+            show={show}
+            addProduct={addOrder}
+            handleClose={handleClose}
+            setRadioSelect={setRadioSelect}
+          />
         </div>
-        {console.log(radioSelect, "selected")}
-        <div className="main_content">{CartItems()}</div>
-        <IntercomModal
-          cartTitle={cart_title}
-          show={show}
-          addProduct={addOrder}
-          handleClose={handleClose}
-          setRadioSelect={setRadioSelect}
-        />
       </div>
     </>
   );
