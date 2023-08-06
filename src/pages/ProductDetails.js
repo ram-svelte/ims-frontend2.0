@@ -69,7 +69,13 @@ function ProductDetails() {
   return (
     <>
       <NavigationBar />
-      <div>
+      <div
+        style={{
+          background: "rgb(0, 131, 183)",
+          height: "100vh",
+          // marginTop: "-14px",
+        }}
+      >
         <div>{productItems}</div>
       </div>
     </>
