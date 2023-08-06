@@ -83,7 +83,7 @@ function App() {
   //       } else {
   //       }
   //     } else {
-  //       sessionStorage.clear();
+  //       localStorage.clear();
   //       localStorage.clear();
   //       history.push("/");
   //       window.location.reload(true);

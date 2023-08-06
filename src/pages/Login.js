@@ -126,8 +126,8 @@ function Login(props) {
             if (response.data.data.length !== 0) {
               console.log("response.data", response.data);
               const role = response.data.data[0].role;
-              sessionStorage.setItem("role", role);
-              sessionStorage.setItem(
+              localStorage.setItem("role", role);
+              localStorage.setItem(
                 "user_type",
                 response.data.data[0].user_type
               );
