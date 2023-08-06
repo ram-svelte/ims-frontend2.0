@@ -286,10 +286,8 @@ function Orders() {
       ) : (
         <>
           <NavigationBar />
-          <div style={{display:"flex",flexDirection:"column"}}>
-      <SideBar/>
-     <div>
-          <Container>
+    <div style={{display:"flex"}}>  <SideBar/> 
+     <div style={{width:"100%"}}>  <Container>
             <div className="container-fluid">
               <div className="cat-head text-center">Orders</div>
               {isLoading ? (
