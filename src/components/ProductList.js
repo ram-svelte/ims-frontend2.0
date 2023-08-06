@@ -16,7 +16,7 @@ function ProductList(props) {
   console.log("props are ", props);
   const [counter, setCounter] = useState(1);
   const context = useContext(MyContext);
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   const params = useParams();
   const dispatch = useDispatch();
   const catId = props.catId;

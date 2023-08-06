@@ -1,12 +1,14 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import queryString from "query-string";
 import AuthContext from "../context/auth-context";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import "../css/LoginForm.css";
+
 import { USER_LOGIN_URL, BASE_URL } from "../Urls";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import LoginLoadingSpinner from "../UI/LoginLoadingSpinner";
@@ -20,6 +22,9 @@ function LoginForm(props) {
   const [passwordType, setPasswordType] = useState("password");
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(true);
+  const { search } = useLocation();
+  let token = queryString.parse(search).token;
+  console.log(search,"lhcjydgd")
 
   const ctx = useContext(AuthContext);
   const [values, setValues] = useState({
@@ -57,6 +62,54 @@ function LoginForm(props) {
     }
     setPasswordType("password");
   };
+
+  // useEffect(() => {
+  //   if (token) {
+  //     let decoded = jwt_decode(token);
+  //     localStorage.setItem("loggedUserName", decoded.uname);
+  //     localStorage.setItem("jwtToken", token);
+  //     // localStorage.setItem("app_type", response.data.show_app.app_switch);
+  //     const access_token = localStorage.getItem("jwtToken");
+  //     console.log(access_token,"dlhdgdhbhdb ")
+  //     const apiCall = async () => {
+  //       try {
+  //         const response = await axios.get(`${BASE_URL}/api/role`, {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         });
+  //         if (response.status === 200) {
+  //           if (response.data.data.length !== 0) {
+  //             console.log("response.data", response.data);
+  //             const role = response.data.data[0].role;
+  //             sessionStorage.setItem("role", role);
+  //             sessionStorage.setItem(
+  //               "user_type",
+  //               response.data.data[0].user_type
+  //             );
+  //             if (role === 2 || role === 3) {
+  //               props.onLogin();
+  //               history.push("/pendingorders");
+  //             } else if (role === 4) {
+  //               props.onLogin();
+  //               history.push("/approvedorders");
+  //             } else {
+  //               props.onLogout();
+
+  //               // Toaster("", "Access Denied");
+  //               // setAuthenticated(true)
+  //             }
+  //           } else {
+  //             props.onLogout();
+
+  //             // Toaster("", "Access Denied");
+  //             // setAuthErrorMsg(true);
+  //           }
+  //         }
+  //       } catch (error) {}
+  //     };
+  //     apiCall();
+  //   }
+  // }, [token]);
+
   const login = async () => {
     try {
       const request = data;
@@ -70,14 +123,14 @@ function LoginForm(props) {
       ) {
         setLoading(false);
         setPasswordError(response.data.message);
-        setLoading(true)
+        setLoading(true);
       } else if (response.status === 200) {
         const token = response.data.data;
         let decoded = jwt_decode(token);
-        sessionStorage.setItem("loggedUserName", decoded.uname);
-        sessionStorage.setItem("jwtToken", token);
-        sessionStorage.setItem("app_type", response.data.show_app.app_switch);
-        const access_token = sessionStorage.getItem("jwtToken");
+        localStorage.setItem("loggedUserName", decoded.uname);
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("app_type", response.data.show_app.app_switch);
+        const access_token = localStorage.getItem("jwtToken");
         try {
           const response = await axios.get(`${BASE_URL}/api/role`, {
             headers: { Authorization: `Bearer ${access_token}` },

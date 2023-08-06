@@ -8,22 +8,23 @@ import { BASE_URL } from "../Urls";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { useDispatch } from "react-redux";
 import { currentPath } from "../redux/action";
+import { Button } from "react-bootstrap";
 
 function Categories() {
   const [items, setItems] = useState([]);
   const { isLoading, error, sendRequest: fetchCategories } = useHttp();
   const dispatch = useDispatch();
-  const access_token = sessionStorage.getItem("jwtToken");
-  //storing currentUrl to sessionStorage
+  const access_token = localStorage.getItem("jwtToken");
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
-    dispatch(currentPath(newUrl[0]))
+    localStorage.setItem("currentUrl", newUrl[0]);
+    dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
-    dispatch(currentPath(splitUrl[3]))
+    localStorage.setItem("currentUrl", splitUrl[3]);
+    dispatch(currentPath(splitUrl[3]));
   }
 
   useEffect(() => {
@@ -41,10 +42,10 @@ function Categories() {
       setItems(loadedItems);
     };
     fetchCategories(
-      { url: `${BASE_URL}/api/categories`,
-      headers: { Authorization: `Bearer ${access_token}` },
-
-     },
+      {
+        url: `${BASE_URL}/api/categories`,
+        headers: { Authorization: `Bearer ${access_token}` },
+      },
       transformCategoryItems
     );
   }, [fetchCategories]);
@@ -58,6 +59,45 @@ function Categories() {
       id={item.id}
     />
   ));
+  const switchToAdmin = async () => {
+    console.log("first")
+    // const appType = res.data.optional.app_type;
+    //     const token = res.data.data;
+        //localStorage.setItem("MBXtoken", token);
+        const url = `http://localhost:9001?token=${access_token}`; //For going to IMS from MailBOX
+        // const url = res.optional.switch_APP_GET;
+        console.log("url is ", url);
+        window.open(url, "_blank", "noopener,noreferrer");
+
+    // setLoading(true);
+    try {
+      // const res = await axios.request({
+      //   method: "POST",
+      //   url: `${SWITCH_TO_MBX_URL}`,
+      //   headers: {
+      //     "Content-type": "application/json",
+      //     Authorization: `Bearer ${access_token}`,
+      //   },
+      //   data: {
+      //     token: access_token,
+      //     from_app: "IMS",
+      //     to_app: "MBX",
+      //   },
+      // });
+      //console.log("response is ", res.data.optional.switch_APP_GET);
+      // if (res.data.status == 1) {
+        // setLoading(false);
+        // const appType = res.data.optional.app_type;
+        // const token = res.data.data;
+        // //localStorage.setItem("MBXtoken", token);
+        // const url = `http://localhost:9001?token=${token}`; //For going to IMS from MailBOX
+        // // const url = res.optional.switch_APP_GET;
+        // console.log("url is ", url);
+        // window.open(url, "_blank", "noopener,noreferrer");
+        // setLoading(false);
+      // }
+    } catch (err) {}
+  };
   return (
     <>
       {error ? (
@@ -71,6 +111,7 @@ function Categories() {
               Note : You can place order of a particular category maximum twice
               a month
             </h6>
+            <Button onClick={switchToAdmin}>hello</Button>
             {/* <PageTitle title="Categories" /> */}
             {isLoading ? (
               <>

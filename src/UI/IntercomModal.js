@@ -38,7 +38,7 @@ function IntercomModal(props) {
   console.log("allBranch is ", allBranches);
   console.log("branchOf", branchOf);
   // console.log("branch", allBranches[0].allBranch);
-  //let cartItemArray = sessionStorage.getItem("cartItemArray");
+  //let cartItemArray = localStorage.getItem("cartItemArray");
   //cartItemArray = JSON.parse(cartItemArray);
   // console.log("cartItemArray", cartItemArray[0].qty);
   let empId = [];

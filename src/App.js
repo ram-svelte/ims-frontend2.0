@@ -34,66 +34,66 @@ function App() {
   const [decodedToken, setDecodedToken] = useState();
   console.log("cart is ", cart);
   let decoded = "";
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   const dispatch = useDispatch();
   const history = useHistory();
   if (access_token) {
     decoded = jwt_decode(access_token);
   }
   const [isLoggedIn, setIsLoggedIn] = useState(
-    sessionStorage.getItem("isLoggedIn") || false
+    localStorage.getItem("isLoggedIn") || false
   );
   const [isOpen, setIsOpen] = useState(false);
 
-  if (access_token && isLoggedIn) {
-    let eventSource = new EventSource("http://14.140.15.95:8802/stream");
-    eventSource.addEventListener(
-      "open",
-      function (e) {
-        console.log("successfull connection");
-      },
-      false
-    );
-    eventSource.addEventListener(
-      "error",
-      function (e) {
-        console.log("error");
-      },
-      false
-    );
+  // if (access_token && isLoggedIn) {
+  //   let eventSource = new EventSource("http://14.140.15.95:8802/stream");
+  //   eventSource.addEventListener(
+  //     "open",
+  //     function (e) {
+  //       console.log("successfull connection");
+  //     },
+  //     false
+  //   );
+  //   eventSource.addEventListener(
+  //     "error",
+  //     function (e) {
+  //       console.log("error");
+  //     },
+  //     false
+  //   );
 
-    eventSource.addEventListener("logout", (e) => {
-      console.log(e.data, "----------");
-      const newData = JSON.parse(e.data);
-      console.log(newData, "newDaTA");
-      console.log("decoded.id", decoded.id);
-      console.log(sessionStorage.getItem("currentUrl"), "url");
-      if (
-        newData.user_id === decoded.id &&
-        sessionStorage.getItem("currentUrl") !== newData.currentUrl
-      ) {
-        if (sessionStorage.getItem("isLoggedIn") == "1") {
-          sessionStorage.setItem("isLoggedIn", "0");
-          console.log("in alert loop", sessionStorage.getItem("isLoggedIn"));
-          if (sessionStorage.getItem("isLoggedIn") === "0") {
-            console.log("idgytdgdldcyfgdknb");
-            setIsOpen(true);
-          }
-        } else {
-        }
-      } else {
-        sessionStorage.clear();
-        history.push("/");
-        window.location.reload(true);
-      }
-    });
-  }
+  //   eventSource.addEventListener("logout", (e) => {
+  //     console.log(e.data, "----------");
+  //     const newData = JSON.parse(e.data);
+  //     console.log(newData, "newDaTA");
+  //     console.log("decoded.id", decoded.id);
+  //     console.log(localStorage.getItem("currentUrl"), "url");
+  //     if (
+  //       newData.user_id === decoded.id &&
+  //       localStorage.getItem("currentUrl") !== newData.currentUrl
+  //     ) {
+  //       if (localStorage.getItem("isLoggedIn") == "1") {
+  //         localStorage.setItem("isLoggedIn", "0");
+  //         console.log("in alert loop", localStorage.getItem("isLoggedIn"));
+  //         if (localStorage.getItem("isLoggedIn") === "0") {
+  //           console.log("idgytdgdldcyfgdknb");
+  //           setIsOpen(true);
+  //         }
+  //       } else {
+  //       }
+  //     } else {
+  //       localStorage.clear();
+  //       history.push("/");
+  //       window.location.reload(true);
+  //     }
+  //   });
+  // }
   const loginHandler = () => {
-    sessionStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
   const logoutOnClose = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     setIsOpen(false);
     history.push("/");
     window.location.reload();
@@ -105,7 +105,7 @@ function App() {
     dispatch(fetchUsersProfile());
     dispatch(fetchAllCompProds());
     dispatch(fetchAllBranch());
-    const storedUserLoggedInInformation = sessionStorage.getItem("isLoggedIn");
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
     if (storedUserLoggedInInformation === "1") {
       setIsLoggedIn(true);
     } else if (storedUserLoggedInInformation === "0") {
@@ -114,12 +114,12 @@ function App() {
   }, [access_token]);
 
   const logoutHandler = () => {
-    sessionStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("loggedUserName");
-    sessionStorage.removeItem("jwtToken");
-    sessionStorage.removeItem("userBranch");
-    sessionStorage.removeItem("userDesignation");
-    sessionStorage.removeItem("app_type");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("loggedUserName");
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userBranch");
+    localStorage.removeItem("userDesignation");
+    localStorage.removeItem("app_type");
     history.push("/");
     setIsLoggedIn(false);
   };
