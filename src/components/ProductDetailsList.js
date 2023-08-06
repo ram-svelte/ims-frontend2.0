@@ -18,11 +18,26 @@ const ProductDetailsList = (props) => {
   const dispatch = useDispatch();
   // const description = props.description;
   // const infoSegments = props.description.split(".");
+  // const trimmedInfo = props.description.trim(); // Trim leading and trailing spaces
+  // const infoSegments = trimmedInfo.split(". ");
+  // const description = infoSegments.map((segment, index) => (
+  //   <li key={index}>{segment}</li>
+  // ));
+  // const trimmedInfo = props.description.trim(); // Trim leading and trailing spaces
+  // const infoSegments = trimmedInfo.split(".");
+  // const description = infoSegments.map((segment, index) => (
+  //   <li key={index}>{segment.trim()}</li>
+  // ));
+
   const trimmedInfo = props.description.trim(); // Trim leading and trailing spaces
-  const infoSegments = trimmedInfo.split(". ");
-  const description = infoSegments.map((segment, index) => (
-    <li key={index}>{segment}</li>
-  ));
+  const infoSegments = trimmedInfo.split(".");
+  const description = infoSegments.reduce((items, segment) => {
+    const trimmedSegment = segment.trim();
+    if (trimmedSegment !== "") {
+      items.push(<li key={items.length}>{trimmedSegment}</li>);
+    }
+    return items;
+  }, []);
   const imagesArray = props.image;
   const title = props.title;
   const context = useContext(MyContext);
@@ -31,7 +46,7 @@ const ProductDetailsList = (props) => {
   const [showDesktop, setShowDesktop] = useState(false);
 
   const access_token = localStorage.getItem("jwtToken");
-  let addedItems=[props.item]
+  let addedItems = [props.item];
   // console.log("props.item",props.catId._id)
   const cart = useSelector((state) => state.handleCart.cart);
 
@@ -281,8 +296,20 @@ const ProductDetailsList = (props) => {
           <div className="image_div">{imageDiv}</div>
 
           <div className="product_container d-flex">
-            <div>
-              <img className="main_product_image" src={imagesArray[index]} />
+            <div
+              className=" "
+              style={{
+                width: "fit-content",
+                height: "fit-content",
+              }}
+            >
+              <img
+                className="main_product_image"
+                src={imagesArray[index]}
+                width="200px"
+                height="200px"
+                style={{ padding: "1rem" }}
+              />
             </div>
 
             <div style={{ marginLeft: "8px" }}>
@@ -370,7 +397,7 @@ const ProductDetailsList = (props) => {
                 </div>
                 <div className="footer-add-to-cart">
                   <div className="d-flex flex-row align-item-center">
-                    <div>
+                    <div style={{ marginRight: "2px", marginTop: "2px" }}>
                       <FontAwesomeIcon
                         style={{
                           color: "white",
@@ -398,7 +425,7 @@ const ProductDetailsList = (props) => {
                       ></input>
                     </div>
 
-                    <div style={{ marginLeft: "0px" }}>
+                    <div style={{ marginLeft: "-12px", marginTop: "2px" }}>
                       <FontAwesomeIcon
                         style={{
                           color: "white",
@@ -410,7 +437,7 @@ const ProductDetailsList = (props) => {
                         // onClick={incrementCount}
                       />
                     </div>
-                    <div style={{ marginTop: "4px", marginLeft: "4px" }}>
+                    <div style={{ marginTop: "4px", marginLeft: "12px" }}>
                       <button
                         className="btn btn-primary add-to-cart-btn mt-0"
                         // onClick={addProduct}
