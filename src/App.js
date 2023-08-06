@@ -46,49 +46,49 @@ function App() {
   );
   const [isOpen, setIsOpen] = useState(false);
 
-  if (access_token && isLoggedIn) {
-    let eventSource = new EventSource("http://14.140.15.95:8802/stream");
-    eventSource.addEventListener(
-      "open",
-      function (e) {
-        console.log("successfull connection");
-      },
-      false
-    );
-    eventSource.addEventListener(
-      "error",
-      function (e) {
-        console.log("error");
-      },
-      false
-    );
+  // if (access_token && isLoggedIn) {
+  //   let eventSource = new EventSource("http://14.140.15.95:8802/stream");
+  //   eventSource.addEventListener(
+  //     "open",
+  //     function (e) {
+  //       console.log("successfull connection");
+  //     },
+  //     false
+  //   );
+  //   eventSource.addEventListener(
+  //     "error",
+  //     function (e) {
+  //       console.log("error");
+  //     },
+  //     false
+  //   );
 
-    eventSource.addEventListener("logout", (e) => {
-      console.log(e.data, "----------");
-      const newData = JSON.parse(e.data);
-      console.log(newData, "newDaTA");
-      console.log("decoded.id", decoded.id);
-      console.log(sessionStorage.getItem("currentUrl"), "url");
-      if (
-        newData.user_id === decoded.id &&
-        sessionStorage.getItem("currentUrl") !== newData.currentUrl
-      ) {
-        if (sessionStorage.getItem("isLoggedIn") == "1") {
-          sessionStorage.setItem("isLoggedIn", "0");
-          console.log("in alert loop", sessionStorage.getItem("isLoggedIn"));
-          if (sessionStorage.getItem("isLoggedIn") === "0") {
-            console.log("idgytdgdldcyfgdknb");
-            setIsOpen(true);
-          }
-        } else {
-        }
-      } else {
-        sessionStorage.clear();
-        history.push("/");
-        window.location.reload(true);
-      }
-    });
-  }
+  //   eventSource.addEventListener("logout", (e) => {
+  //     console.log(e.data, "----------");
+  //     const newData = JSON.parse(e.data);
+  //     console.log(newData, "newDaTA");
+  //     console.log("decoded.id", decoded.id);
+  //     console.log(sessionStorage.getItem("currentUrl"), "url");
+  //     if (
+  //       newData.user_id === decoded.id &&
+  //       sessionStorage.getItem("currentUrl") !== newData.currentUrl
+  //     ) {
+  //       if (sessionStorage.getItem("isLoggedIn") == "1") {
+  //         sessionStorage.setItem("isLoggedIn", "0");
+  //         console.log("in alert loop", sessionStorage.getItem("isLoggedIn"));
+  //         if (sessionStorage.getItem("isLoggedIn") === "0") {
+  //           console.log("idgytdgdldcyfgdknb");
+  //           setIsOpen(true);
+  //         }
+  //       } else {
+  //       }
+  //     } else {
+  //       sessionStorage.clear();
+  //       history.push("/");
+  //       window.location.reload(true);
+  //     }
+  //   });
+  // }
   const loginHandler = () => {
     sessionStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);

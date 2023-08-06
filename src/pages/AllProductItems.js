@@ -29,7 +29,7 @@ function AllProductItems() {
   const { isLoading, error, sendRequest: fetchProducts } = useHttp();
   const params = useParams();
   let limit = 16;
-  const access_token = sessionStorage.getItem('jwtToken');
+  const access_token = sessionStorage.getItem("jwtToken");
 
   //storing currentUrl to sessionStorage
   const currentUrl = window.location.href;
@@ -109,7 +109,7 @@ function AllProductItems() {
           <NavigationBar />
           <div className="stat">
             <div className="stationr container-fluid">
-              <div className="cat-head text-center">{params.categoryTitle}</div>
+              <div className="cat-head">{params.categoryTitle}</div>
               {isLoading ? (
                 <>
                   <div className=" d-flex justify-content-center loading_spinner ">
