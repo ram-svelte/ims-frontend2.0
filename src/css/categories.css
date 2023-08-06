@@ -162,8 +162,13 @@ nav-link:hover {
 }
 
 .cat-head {
-  font-size: 2rem;
-  font-weight: 650;
+  font-size: 1.5rem;
+  /* font-weight: 650;
+   */
+   margin-bottom: 2rem;
+   margin-left: 1rem;
+   font-weight: bold;
+  color: white;
 }
 
 .dFlex {
