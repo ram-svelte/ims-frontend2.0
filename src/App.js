@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Routes from "./Routes";
 import AuthContext from "./context/auth-context";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import {
   fetchUsersCart,
   fetchUsersProfile,

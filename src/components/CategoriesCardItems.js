@@ -8,7 +8,7 @@ const CardItems = ({title,image,id}) => {
 		<Link  to={`/categories/${id}/${title}`}>
 	<div style={{borderRadius:"5px",cursor:"pointer"}} className='card-head'>
 	<div style={{borderRadius:"5px"}}>
-		<img width={200} height={200} src={false?image:"lap.jpg"}/>
+		<img  style={{borderRadius:"5px"}} width={200} height={200} src={image}/>
 	</div>
 	<div style={{background: "#212121",color:"white",textAlign:"center",padding:"3px"}} className='card-title'>{title}</div>
 	</div>
