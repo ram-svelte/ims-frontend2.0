@@ -17,29 +17,29 @@ import AuthContext from "../context/auth-context";
 import "../css/NavigationBar.css";
 import { USER_LOGIN_URL, SWITCH_TO_MBX_URL, REACT_APP_MBX_URL } from "../Urls";
 import SearchBar from "./SearchBar";
-import LoadingSpinner from "./LoadingSpinner"
+import LoadingSpinner from "./LoadingSpinner";
 
 import { currentPath } from "../redux/action";
 
 function NavigationBar() {
   const state = useSelector((state) => state.handleCart.cart);
   // const userProfile = useSelector((state) => state.handleUsers.users);
-  const BRANCH = sessionStorage.getItem("userBranch");
-  const DESIGNATION = sessionStorage.getItem("userDesignation");
-  const user_name = sessionStorage.getItem("loggedUserName");
+  const BRANCH = localStorage.getItem("userBranch");
+  const DESIGNATION = localStorage.getItem("userDesignation");
+  const user_name = localStorage.getItem("loggedUserName");
   const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  const switchAppType = sessionStorage.getItem("app_type");
+  const switchAppType = localStorage.getItem("app_type");
   let total = state.length;
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   let loggedUserName = "";
   const currentUrl = useSelector((state) => state.urlReducer.url);
   let url = "";
 
   try {
-    loggedUserName = sessionStorage.getItem("loggedUserName")[0].toUpperCase();
+    loggedUserName = localStorage.getItem("loggedUserName")[0].toUpperCase();
   } catch (error) {
     loggedUserName = "X";
   }
@@ -48,17 +48,15 @@ function NavigationBar() {
     // console.log(currentUrl, "url on logout");
 
     if (!currentUrl) {
-
       url = "home";
-      sessionStorage.setItem("currentUrl", url);
+      localStorage.setItem("currentUrl", url);
       // dispatch(currentPath(url))
       console.log(url, "url on logout");
     } else {
       url = currentUrl;
-      sessionStorage.setItem("currentUrl", url);
+      localStorage.setItem("currentUrl", url);
       // dispatch(currentPath(url))
       console.log(url, "url on logout");
-
     }
     // return;
     try {
@@ -98,7 +96,7 @@ function NavigationBar() {
         setLoading(false);
         const appType = res.data.optional.app_type;
         const token = res.data.data;
-        //sessionStorage.setItem("MBXtoken", token);
+        //localStorage.setItem("MBXtoken", token);
         const url = `${REACT_APP_MBX_URL}?token=${token}&app_type=${appType}`; //For going to IMS from MailBOX
         // const url = res.optional.switch_APP_GET;
         console.log("url is ", url);
@@ -184,10 +182,7 @@ function NavigationBar() {
             </ul>
           </div>
         </div>
-        <div
-          className="switch_dropdown"
-          style={{ marginBottom: 30 }}
-        >
+        <div className="switch_dropdown" style={{ marginBottom: 30 }}>
           <Dropdown>
             <Dropdown.Toggle
               // className="profile_icon"
@@ -209,8 +204,8 @@ function NavigationBar() {
                   ) : null}
                 </div>
               ) : (
-                <div style={{textAlign:"center", color:"#337ed7"}}>
-               <LoadingSpinner/>
+                <div style={{ textAlign: "center", color: "#337ed7" }}>
+                  <LoadingSpinner />
                 </div>
               )}
             </Dropdown.Menu>

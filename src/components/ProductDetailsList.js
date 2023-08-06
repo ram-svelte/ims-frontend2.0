@@ -30,8 +30,8 @@ const ProductDetailsList = (props) => {
   const [show, setShow] = useState(false);
   const [showDesktop, setShowDesktop] = useState(false);
 
-  const access_token = sessionStorage.getItem("jwtToken");
-  let addedItems = [props.item];
+  const access_token = localStorage.getItem("jwtToken");
+  let addedItems=[props.item]
   // console.log("props.item",props.catId._id)
   const cart = useSelector((state) => state.handleCart.cart);
 

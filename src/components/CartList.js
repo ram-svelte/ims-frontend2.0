@@ -8,7 +8,7 @@ import axios from "axios";
 import { BASE_URL } from "../Urls";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function CartList(props) {
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   const cart = useSelector((state) => state.handleCart.cart);
   const currentCartItem = cart.find((x) => x.id === props.item.id);
   let counter = currentCartItem.qty;

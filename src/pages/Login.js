@@ -37,10 +37,10 @@ function Login(props) {
       if (response.status === 200) {
         const token = response.data.data;
         let decoded = jwt_decode(token);
-        sessionStorage.setItem("loggedUserName", decoded.uname);
-        sessionStorage.setItem("jwtToken", token);
-        sessionStorage.setItem("app_type", response.data.show_app.app_switch);
-        const access_token = sessionStorage.getItem("jwtToken");
+        localStorage.setItem("loggedUserName", decoded.uname);
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("app_type", response.data.show_app.app_switch);
+        const access_token = localStorage.getItem("jwtToken");
         try {
           const response = await axios.get(`${BASE_URL}/api/role`, {
             headers: { Authorization: `Bearer ${access_token}` },
@@ -109,16 +109,50 @@ function Login(props) {
   // };
 
   useEffect(() => {
-    console.log("working fine", token);
-    console.log("app type", appType);
     if (token) {
-      // let decoded = jwt_decode(token);
-      // sessionStorage.setItem("loggedUserName", decoded.uname);
-      // sessionStorage.setItem("jwtToken", token);
-      // sessionStorage.setItem("app_type", appType);
-      console.log("login ins called");
-      // getRole(token);
       login();
+      let decoded = jwt_decode(token);
+      localStorage.setItem("loggedUserName", decoded.uname);
+      localStorage.setItem("jwtToken", token);
+      // localStorage.setItem("app_type", response.data.show_app.app_switch);
+      const access_token = localStorage.getItem("jwtToken");
+      console.log(access_token, "dlhdgdhbhdb ");
+      const apiCall = async () => {
+        try {
+          const response = await axios.get(`${BASE_URL}/api/role`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (response.status === 200) {
+            if (response.data.data.length !== 0) {
+              console.log("response.data", response.data);
+              const role = response.data.data[0].role;
+              sessionStorage.setItem("role", role);
+              sessionStorage.setItem(
+                "user_type",
+                response.data.data[0].user_type
+              );
+              if (role === 2 || role === 3) {
+                props.onLogin();
+                history.push("/pendingorders");
+              } else if (role === 4) {
+                props.onLogin();
+                history.push("/approvedorders");
+              } else {
+                props.onLogout();
+
+                // Toaster("", "Access Denied");
+                // setAuthenticated(true)
+              }
+            } else {
+              props.onLogout();
+
+              // Toaster("", "Access Denied");
+              // setAuthErrorMsg(true);
+            }
+          }
+        } catch (error) {}
+      };
+      apiCall();
     }
   }, [token]);
 

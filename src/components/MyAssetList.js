@@ -10,7 +10,7 @@ const MyAssetList = (props) => {
   const [empId, setEmpId] = useState(props.authorizedEmpId);
   const [disabled, setDisabled] = useState(true);
   const buttonRef = useRef(null);
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
 
   // console.log("props in List Asset are", props);
   const regExp = new RegExp(`^[0-9]{4}[a-zA-Z]{1}$`);

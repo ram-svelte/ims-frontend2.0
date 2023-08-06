@@ -8,6 +8,12 @@ function SideBar() {
   let name=sessionStorage.getItem('loggedUserName')
   let designation=sessionStorage.getItem('userDesignation')
   let user_type=localStorage.getItem('user_type')
+  let access_token=localStorage.getItem('access_token')
+  const switchToAdmin = async () => {
+    const url = `http://localhost:9001?token=${access_token}`; 
+    console.log("url is ", url);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 	return (
 		<div className='main'>
 			<div className='profile-image'>
@@ -33,7 +39,7 @@ function SideBar() {
 				</span>
 			</div>
           {role!=1&&  <div className='btn-container'>
-                <button className='btn'>Approve</button>
+                <button onClick={switchToAdmin} className='btn'>Approve</button>
                 <br/>
                 <button className='btn'>Allocation</button>
             </div>}

@@ -52,54 +52,102 @@ function LoginForm(props) {
 		setErrorMsg(false);
 	};
 
-	const togglePassword = () => {
-		if (passwordType === 'password') {
-			setPasswordType('text');
-			return;
-		}
-		setPasswordType('password');
-	};
-	const login = async () => {
-		try {
-			const request = data;
-			const response = await axios.post(
-				`${USER_LOGIN_URL}/api/users/login`,
-				request
-			);
-			if (
-				(response.status === 200 && response.data.status === 2) ||
-				response.data.status === 3
-			) {
-				setLoading(false);
-				setPasswordError(response.data.message);
-				setLoading(true);
-			} else if (response.status === 200) {
-				const token = response.data.data;
-				let decoded = jwt_decode(token);
-				sessionStorage.setItem('loggedUserName', decoded.uname);
-				sessionStorage.setItem('jwtToken', token);
-				sessionStorage.setItem('app_type', response.data.show_app.app_switch);
-				const access_token = sessionStorage.getItem('jwtToken');
-				try {
-					const response = await axios.get(`${BASE_URL}/api/role`, {
-						headers: { Authorization: `Bearer ${access_token}` },
-					});
-					if (response.status === 200) {
-						if (response.data.data.length !== 0) {
-							const role = response.data.data[0].role;
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text");
+      return;
+    }
+    setPasswordType("password");
+  };
+
+  // useEffect(() => {
+  //   if (token) {
+  //     let decoded = jwt_decode(token);
+  //     localStorage.setItem("loggedUserName", decoded.uname);
+  //     localStorage.setItem("jwtToken", token);
+  //     // localStorage.setItem("app_type", response.data.show_app.app_switch);
+  //     const access_token = localStorage.getItem("jwtToken");
+  //     console.log(access_token,"dlhdgdhbhdb ")
+  //     const apiCall = async () => {
+  //       try {
+  //         const response = await axios.get(`${BASE_URL}/api/role`, {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         });
+  //         if (response.status === 200) {
+  //           if (response.data.data.length !== 0) {
+  //             console.log("response.data", response.data);
+  //             const role = response.data.data[0].role;
+  //             sessionStorage.setItem("role", role);
+  //             sessionStorage.setItem(
+  //               "user_type",
+  //               response.data.data[0].user_type
+  //             );
+  //             if (role === 2 || role === 3) {
+  //               props.onLogin();
+  //               history.push("/pendingorders");
+  //             } else if (role === 4) {
+  //               props.onLogin();
+  //               history.push("/approvedorders");
+  //             } else {
+  //               props.onLogout();
+
+  //               // Toaster("", "Access Denied");
+  //               // setAuthenticated(true)
+  //             }
+  //           } else {
+  //             props.onLogout();
+
+  //             // Toaster("", "Access Denied");
+  //             // setAuthErrorMsg(true);
+  //           }
+  //         }
+  //       } catch (error) {}
+  //     };
+  //     apiCall();
+  //   }
+  // }, [token]);
+
+  const login = async () => {
+    try {
+      const request = data;
+      const response = await axios.post(
+        `${USER_LOGIN_URL}/api/users/login`,
+        request
+      );
+      if (
+        (response.status === 200 && response.data.status === 2) ||
+        response.data.status === 3
+      ) {
+        setLoading(false);
+        setPasswordError(response.data.message);
+        setLoading(true);
+      } else if (response.status === 200) {
+        const token = response.data.data;
+        let decoded = jwt_decode(token);
+        localStorage.setItem("loggedUserName", decoded.uname);
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("app_type", response.data.show_app.app_switch);
+        const access_token = localStorage.getItem("jwtToken");
+        try {
+          const response = await axios.get(`${BASE_URL}/api/role`, {
+            headers: { Authorization: `Bearer ${access_token}` },
+          });
+          if (response.status === 200) {
+            if (response.data.data.length !== 0) {
+              const role = response.data.data[0].role;
               localStorage.setItem('user_type',response?.data?.data[0]?.user_type)
               localStorage.setItem('role',role)
-							if (role === 1 || role === 3 || role === 4) {
-								props.onLogin();
-								setLoading(true);
-								setAuthErrorMsg(false);
-								history.push('/');
-							} else {
-								setLoading(true);
-								setAuthErrorMsg(true);
-							}
-						} else {
-							setLoading(true);
+              if (role === 1 || role === 3 || role === 4) {
+                props.onLogin();
+                setLoading(true);
+                setAuthErrorMsg(false);
+                history.push("/");
+              } else {
+                setLoading(true);
+                setAuthErrorMsg(true);
+              }
+            } else {
+              setLoading(true);
 
 							setAuthErrorMsg(true);
 						}
