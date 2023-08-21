@@ -2,16 +2,17 @@
 
 import React from 'react';
 import './index.css';
-import { BASE_URL } from '../../Urls';
+import { BASE_URL, STAGING_SERVER_URL } from '../../Urls';
 
 function SideBar() {
+
   let role=localStorage.getItem('role')
   let name=localStorage.getItem('loggedUserName')
   let designation=localStorage.getItem('userDesignation')
   let user_type=localStorage.getItem('user_type')
   let access_token=localStorage.getItem('jwtToken')
   const switchToAdmin = async () => {
-    const url = `http://${"localhost:9001"}?token=${access_token}`; 
+    const url = `http://${"192.168.15.46"}:9001?token=${access_token}`; 
     console.log("url is ", url);
     window.open(url, "_blank", "noopener,noreferrer");
   };

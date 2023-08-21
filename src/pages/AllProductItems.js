@@ -82,7 +82,7 @@ function AllProductItems() {
 
   console.log("productList", items);
 
-  const productList = items.map((item) => (
+  const productList = items.filter((item,i)=>i<6).map((item) => (
     <ProductList
       catId={item.categoryId}
       catTitle={item.categoryTitle}

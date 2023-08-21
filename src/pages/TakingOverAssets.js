@@ -24,7 +24,7 @@ const TakingOverAssets = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   let decoded = jwt_decode(access_token);
-  const USERID = decoded.name;
+  const USERID = decoded.id;
 
   //storing currentUrl to localStorage
   const currentUrl = window.location.href;
@@ -63,7 +63,7 @@ const TakingOverAssets = () => {
   };
 
   const submitCheckedBoxData = async (req) => {
-    const filteredData = items.filter((item) => item.isChecked === true);
+    const filteredData = items?.filter((item) => item.isChecked === true);
     console.log("filteredData", filteredData);
     const handOverAssets = [];
     filteredData.forEach((item, i) => {
@@ -76,13 +76,13 @@ const TakingOverAssets = () => {
     const key = "allocationId";
 
     const uniqueAllocationId = [
-      ...new Map(handOverAssets.map((item) => [item[key], item])).values(),
+      ...new Map(handOverAssets?.map((item) => [item[key], item])).values(),
     ];
 
     console.log("arrayUniqueByKey", uniqueAllocationId);
 
     const sendAssetObject = [];
-    uniqueAllocationId.forEach((allocationItem) => {
+    uniqueAllocationId?.forEach((allocationItem) => {
       sendAssetObject.push({
         _id: allocationItem.allocationId,
         data: handOverAssets.filter(
@@ -120,40 +120,42 @@ const TakingOverAssets = () => {
   //   const handleHandover = () => {
   //     setToggle(!toggle);
   //   };
-
+  let loadedItems = [];
   useEffect(() => {
     const transformAssetsItem = (assetsItems) => {
       //console.log("assetsItems are", assetsItems);
-      assetsItems = assetsItems.data;
+      assetsItems = assetsItems?.data;
       console.log("order items bfr push", assetsItems);
-      const loadedItems = [];
 
-      assetsItems.forEach((data, i) => {
-        let empId = data.empId;
-        let allocationId = data._id;
-        data.authorizedToUse.forEach((item, i) => {
-          if (item.status === "TakingOverReq" && item.user_id == USERID) {
-            loadedItems.push({
+      assetsItems?.forEach((data, i) => {
+        console.log(data,"ljfbhfbh")
+        let empId = data?.empId;
+        let allocationId = data?._id;
+        data?.authorizedToUse?.forEach((item, i) => {
+          console.log(item?.user_id, USERID,item?.status,"kbjhfhbf")
+          if (item?.status === "TakingOverReq" && item?.user_id == USERID) {
+            loadedItems?.push({
               employeeId: empId,
               allocationId: allocationId,
-              prod_id: item.prod_id._id,
-              title: item.prod_id.title,
-              brand: item.brand,
-              model: item.model,
-              fromUser: item.fromUser,
-              toUser: item.toUser,
-              user_id: item.user_id,
-              serialNo: item.serialNo,
-              dop: item.dop.split("T")[0],
-              authorizedEmpId: item.employeeId,
-              _id: item._id,
+              prod_id: item?.prod_id?._id,
+              title: item?.prod_id?.title,
+              brand: item?.brand,
+              model: item?.model,
+              fromUser: item?.fromUser,
+              toUser: item?.toUser,
+              user_id: item?.user_id,
+              serialNo: item?.serialNo,
+              dop: item?.dop?.split("T")[0],
+              authorizedEmpId: item?.employeeId,
+              _id: item?._id,
             });
+            setItems(loadedItems);
           }
+          console.log(items,"ljdbkhbf")
         });
       });
 
       console.log("loadedItems  are", loadedItems);
-      setItems(loadedItems);
     };
     fetchAssets(
       {
