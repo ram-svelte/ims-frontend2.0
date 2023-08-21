@@ -11,6 +11,7 @@ import queryString from "query-string";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 function AllProductItems() {
   const { search } = useLocation();
@@ -29,17 +30,17 @@ function AllProductItems() {
   const { isLoading, error, sendRequest: fetchProducts } = useHttp();
   const params = useParams();
   let limit = 16;
-  const access_token = sessionStorage.getItem('jwtToken');
+  const access_token = localStorage.getItem("jwtToken");
 
-  //storing currentUrl to sessionStorage
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
+    localStorage.setItem("currentUrl", newUrl[0]);
     dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
+    localStorage.setItem("currentUrl", splitUrl[3]);
     dispatch(currentPath(splitUrl[3]));
   }
 
@@ -73,7 +74,7 @@ function AllProductItems() {
     );
     if (!error) {
       history.replace({
-        pathname: location.pathname,
+        pathname: location?.pathname,
         search: `?catId=${params.categoryId}&page=${currentPage}&limit=${limit}`,
       });
     }
@@ -81,7 +82,7 @@ function AllProductItems() {
 
   console.log("productList", items);
 
-  const productList = items.map((item) => (
+  const productList = items.filter((item,i)=>i<6).map((item) => (
     <ProductList
       catId={item.categoryId}
       catTitle={item.categoryTitle}
@@ -107,27 +108,36 @@ function AllProductItems() {
       ) : (
         <>
           <NavigationBar />
-          <div className="stat">
-            <div className="stationr container-fluid">
-              <div className="cat-head text-center">{params.categoryTitle}</div>
-              {isLoading ? (
-                <>
-                  <div className=" d-flex justify-content-center loading_spinner ">
-                    <LoadingSpinner />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="main_content">{productList}</div>
-                  <div className="d-flex justify-content-center">
-                    <Pagination
-                      OnhandlePageClick={handlePageClick}
-                      pageCount={pageCount}
-                      pageNumber={currentPage - 1}
-                    />
-                  </div>
-                </>
-              )}
+
+          <div className="flex-box">
+            <SideBar />
+            <div className="stat">
+              <div className="stationr container-fluid">
+                <div className="cat-head">{params.categoryTitle}</div>
+                {isLoading ? (
+                  <>
+                    <div className=" d-flex justify-content-center loading_spinner ">
+                      <LoadingSpinner />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="main_content-product-list">
+                      {productList}
+                    </div>
+                    <div
+                      className="d-flex justify-content-center"
+                      style={{ marginTop: "5rem" }}
+                    >
+                      <Pagination
+                        OnhandlePageClick={handlePageClick}
+                        pageCount={pageCount}
+                        pageNumber={currentPage - 1}
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </>

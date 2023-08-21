@@ -1,5 +1,7 @@
 .stat {
-  background-color: #fff;
+  background: rgb(0, 131, 183);
+  height: 100vh;
+  width: 100%;
 }
 
 @media screen and (max-width: 1530px) {

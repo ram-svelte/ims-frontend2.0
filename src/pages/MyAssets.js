@@ -12,11 +12,12 @@ import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 const MyAssets = () => {
   const { isLoading, error, sendRequest: fetchAssets } = useHttp();
   const [items, setItems] = useState([]);
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   const [checkedData, setCheckedData] = useState([]);
   const [surrenderToggle, setSurrenderToggle] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -26,15 +27,15 @@ const MyAssets = () => {
   let decoded = jwt_decode(access_token);
   const USERID = decoded.name;
 
-  //storing currentUrl to sessionStorage
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
+    localStorage.setItem("currentUrl", newUrl[0]);
     dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
+    localStorage.setItem("currentUrl", splitUrl[3]);
     dispatch(currentPath(splitUrl[3]));
   }
 
@@ -231,6 +232,8 @@ const MyAssets = () => {
   return (
     <>
       <NavigationBar />
+      <div style={{display:"flex"}}>  <SideBar/> 
+      <div>
       <Container>
         <div className="container-fluid">
           <div
@@ -343,6 +346,8 @@ const MyAssets = () => {
           </>
         )}
       </Container>
+      </div>
+      </div>
     </>
   );
 };

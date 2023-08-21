@@ -26,6 +26,7 @@ import {
 } from "../Constant";
 import { useDispatch } from "react-redux";
 import { currentPath } from "../redux/action";
+import SideBar from "../UI/sideBar";
 
 function Orders() {
   const ref = useRef([]);
@@ -43,22 +44,22 @@ function Orders() {
   const [finalOrder, setFinalORder] = useState([]);
   const limit = 10;
 
-  //storing currentUrl to sessionStorage
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
+    localStorage.setItem("currentUrl", newUrl[0]);
     dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
+    localStorage.setItem("currentUrl", splitUrl[3]);
     dispatch(currentPath(splitUrl[3]));
   }
 
   const [items, setItems] = useState([]);
 
   const { isLoading, error, sendRequest: fetchOrders } = useHttp();
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
 
   const handleClose = () => {
     setShow(false);
@@ -213,7 +214,7 @@ function Orders() {
     );
     if (!error) {
       history.replace({
-        pathname: location.pathname,
+        pathname: location?.pathname,
         search: `?page=${currentPage}&limit=${limit}`,
       });
     }
@@ -285,7 +286,8 @@ function Orders() {
       ) : (
         <>
           <NavigationBar />
-          <Container>
+    <div style={{display:"flex"}}>  <SideBar/> 
+     <div style={{width:"100%"}}>  <Container>
             <div className="container-fluid">
               <div className="cat-head text-center">Orders</div>
               {isLoading ? (
@@ -315,6 +317,8 @@ function Orders() {
               finalOrder={finalOrder}
             />
           </Container>
+          </div>
+          </div>
         </>
       )}
     </>
@@ -360,7 +364,7 @@ export default Orders;
 //   const [items, setItems] = useState([]);
 
 //   const { isLoading, error, sendRequest: fetchOrders } = useHttp();
-//   const access_token = sessionStorage.getItem("jwtToken");
+//   const access_token = localStorage.getItem("jwtToken");
 
 //   const handleClose = () => {
 //     setShow(false);
@@ -493,16 +497,16 @@ export default Orders;
 //     );
 //     // if (error) {
 //     //   console.log("in error block of orders");
-//     //   sessionStorage.removeItem("isLoggedIn");
-//     //   sessionStorage.removeItem("loggedUserName");
-//     //   sessionStorage.removeItem("jwtToken");
-//     //   sessionStorage.removeItem("userBranch");
-//     //   sessionStorage.removeItem("userDesignation");
+//     //   localStorage.removeItem("isLoggedIn");
+//     //   localStorage.removeItem("loggedUserName");
+//     //   localStorage.removeItem("jwtToken");
+//     //   localStorage.removeItem("userBranch");
+//     //   localStorage.removeItem("userDesignation");
 //     //   history.push("/");
 //     // }
 //     if (!error) {
 //       history.replace({
-//         pathname: location.pathname,
+//         pathname: location?.pathname,
 //         search: `?page=${currentPage}&limit=${limit}`,
 //       });
 //     }

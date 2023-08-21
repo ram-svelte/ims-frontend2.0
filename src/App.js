@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Routes from "./Routes";
 import AuthContext from "./context/auth-context";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import {
   fetchUsersCart,
   fetchUsersProfile,
@@ -34,14 +35,14 @@ function App() {
   const [decodedToken, setDecodedToken] = useState();
   console.log("cart is ", cart);
   let decoded = "";
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   const dispatch = useDispatch();
   const history = useHistory();
   if (access_token) {
     decoded = jwt_decode(access_token);
   }
   const [isLoggedIn, setIsLoggedIn] = useState(
-    sessionStorage.getItem("isLoggedIn") || false
+    localStorage.getItem("isLoggedIn") || false
   );
   const [isOpen, setIsOpen] = useState(false);
 
@@ -89,11 +90,11 @@ function App() {
   //   });
   // }
   const loginHandler = () => {
-    sessionStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
   const logoutOnClose = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     setIsOpen(false);
     history.push("/");
     window.location.reload();
@@ -105,7 +106,7 @@ function App() {
     dispatch(fetchUsersProfile());
     dispatch(fetchAllCompProds());
     dispatch(fetchAllBranch());
-    const storedUserLoggedInInformation = sessionStorage.getItem("isLoggedIn");
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
     if (storedUserLoggedInInformation === "1") {
       setIsLoggedIn(true);
     } else if (storedUserLoggedInInformation === "0") {
@@ -114,12 +115,12 @@ function App() {
   }, [access_token]);
 
   const logoutHandler = () => {
-    sessionStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("loggedUserName");
-    sessionStorage.removeItem("jwtToken");
-    sessionStorage.removeItem("userBranch");
-    sessionStorage.removeItem("userDesignation");
-    sessionStorage.removeItem("app_type");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("loggedUserName");
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userBranch");
+    localStorage.removeItem("userDesignation");
+    localStorage.removeItem("app_type");
     history.push("/");
     setIsLoggedIn(false);
   };
@@ -132,7 +133,10 @@ function App() {
   }
 
   return (
-    <>
+    <div className="App">
+      {/* <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1> */}
       <div style={BUTTON_WRAPPER_STYLES}>
         <LogoutModal open={isOpen} onClose={logoutOnClose} />
       </div>
@@ -161,7 +165,7 @@ function App() {
           </AuthContext.Provider>
         </Auth>
       </div>
-    </>
+    </div>
   );
 }
 

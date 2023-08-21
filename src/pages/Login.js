@@ -37,10 +37,10 @@ function Login(props) {
       if (response.status === 200) {
         const token = response.data.data;
         let decoded = jwt_decode(token);
-        sessionStorage.setItem("loggedUserName", decoded.uname);
-        sessionStorage.setItem("jwtToken", token);
-        sessionStorage.setItem("app_type", response.data.show_app.app_switch);
-        const access_token = sessionStorage.getItem("jwtToken");
+        localStorage.setItem("loggedUserName", decoded.uname);
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("app_type", response.data.show_app.app_switch);
+        const access_token = localStorage.getItem("jwtToken");
         try {
           const response = await axios.get(`${BASE_URL}/api/role`, {
             headers: { Authorization: `Bearer ${access_token}` },
@@ -109,36 +109,98 @@ function Login(props) {
   // };
 
   useEffect(() => {
-    console.log("working fine", token);
-    console.log("app type", appType);
     if (token) {
-      // let decoded = jwt_decode(token);
-      // sessionStorage.setItem("loggedUserName", decoded.uname);
-      // sessionStorage.setItem("jwtToken", token);
-      // sessionStorage.setItem("app_type", appType);
-      console.log("login ins called");
-      // getRole(token);
       login();
+      let decoded = jwt_decode(token);
+      localStorage.setItem("loggedUserName", decoded.uname);
+      localStorage.setItem("jwtToken", token);
+      // localStorage.setItem("app_type", response.data.show_app.app_switch);
+      const access_token = localStorage.getItem("jwtToken");
+      console.log(access_token, "dlhdgdhbhdb ");
+      const apiCall = async () => {
+        try {
+          const response = await axios.get(`${BASE_URL}/api/role`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (response.status === 200) {
+            if (response.data.data.length !== 0) {
+              console.log("response.data", response.data);
+              const role = response.data.data[0].role;
+              localStorage.setItem("role", role);
+              localStorage.setItem(
+                "user_type",
+                response.data.data[0].user_type
+              );
+              if (role === 2 || role === 3) {
+                props.onLogin();
+                history.push("/pendingorders");
+              } else if (role === 4) {
+                props.onLogin();
+                history.push("/approvedorders");
+              } else {
+                props.onLogout();
+
+                // Toaster("", "Access Denied");
+                // setAuthenticated(true)
+              }
+            } else {
+              props.onLogout();
+
+              // Toaster("", "Access Denied");
+              // setAuthErrorMsg(true);
+            }
+          }
+        } catch (error) {}
+      };
+      apiCall();
     }
   }, [token]);
 
   return !token ? (
-    <div className="home">
-      <div className="container-fluid">
-        <div className="row home-main">
-          <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
-            <div className="row px-3 mt-4 border-line">
-              <img src="img/home-store.png" />
+    <div style={{ overflow: "hidden" }}>
+      <div style={{ background: "white", height: "100vh" }} className="home">
+        <div style={{ background: "black", height: "80px", width: "100%" }}>
+          <img
+            style={{ margin: "25px", marginLeft: "80px" }}
+            src="/img/logo.png"
+          />
+        </div>
+        <div className="container-fluid">
+          <div className=" home-main">
+            <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
+              {/* <div className="d-absolute  mt-4 border-line"> */}
+              <img
+                style={{
+                  bottom: "150",
+                  position: "absolute",
+                  width: "950px",
+                  height: "400",
+                  marginLeft: "-10px",
+                  bottom: "0",
+                }}
+                src="img/bg.png"
+              />
+              {/* </div> */}
             </div>
-          </div>
 
-          <div className="col-lg-6 col-md-6 col-sm-6 mb-4">
-            <div className="welcome">
-              <h2 className="mb-4"> Welcome to e-Stores </h2>
-              <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-                <LoginForm onFlip={handleFlip} onLogin={props.onLogin} />
-                <BackLoginForm onLogin={props.onLogin} onFlip={handleFlip} />
-              </ReactCardFlip>
+            <div
+              style={{
+                background: "#0083B7",
+                height: "100vh",
+                margin: "auto",
+                paddingTop: "15%",
+                marginRight: "-20px",
+              }}
+              className="col-lg-6 col-md-6 col-sm-6 "
+            >
+              {/* <div> */}
+              {/* <h2 className="mb-4"> Welcome To Asset Management </h2> */}
+              {/* <ReactCardFlip sty isFlipped={isFlipped} flipDirection="horizontal"> */}
+              {/* <div > */}
+              <LoginForm onFlip={handleFlip} onLogin={props.onLogin} />
+
+              {/* </div> */}
+              {/* </div> */}
             </div>
           </div>
         </div>

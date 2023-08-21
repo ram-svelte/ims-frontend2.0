@@ -25,17 +25,17 @@ function SearchResults() {
   }
 
   const limit = 16;
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
 
-  //storing currentUrl to sessionStorage
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
+    localStorage.setItem("currentUrl", newUrl[0]);
     dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
+    localStorage.setItem("currentUrl", splitUrl[3]);
     dispatch(currentPath(splitUrl[3]));
   }
 
@@ -97,13 +97,13 @@ function SearchResults() {
       if (context.page === 1) {
         context.page = 0;
         history.replace({
-          pathname: location.pathname,
+          pathname: location?.pathname,
           search: `?title=${searchInput}&page=${1}&limit=${limit}`,
         });
       } else {
         context.page = 0;
         history.replace({
-          pathname: location.pathname,
+          pathname: location?.pathname,
           search: `?title=${searchInput}&page=${currentPage}&limit=${limit}`,
         });
       }

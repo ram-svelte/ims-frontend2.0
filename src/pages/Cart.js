@@ -13,25 +13,26 @@ import { fetchAllCompProds } from "../redux/action";
 
 import IntercomModal from "../UI/IntercomModal";
 import { CPU, DESKTOP, MONITOR, TYPE } from "../Constant";
+import SideBar from "../UI/sideBar";
 
 function Cart() {
   const history = useHistory();
-  const BRANCH = sessionStorage.getItem("userBranch");
-  const DESIGNATION = sessionStorage.getItem("userDesignation");
-  const NAME = sessionStorage.getItem("loggedUserName");
+  const BRANCH = localStorage.getItem("userBranch");
+  const DESIGNATION = localStorage.getItem("userDesignation");
+  const NAME = localStorage.getItem("loggedUserName");
   const [show, setShow] = useState(false);
   const [radioSelect, setRadioSelect] = useState("");
   const dispatch = useDispatch();
 
-  //storing currentUrl to sessionStorage
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
+    localStorage.setItem("currentUrl", newUrl[0]);
     dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
+    localStorage.setItem("currentUrl", splitUrl[3]);
     dispatch(currentPath(splitUrl[3]));
   }
 
@@ -58,7 +59,7 @@ function Cart() {
     dispatch(fetchAllCompProds());
   }, []);
 
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   let showBtn = false;
   if (cartLength >= 1) {
     showBtn = true;
@@ -234,31 +235,36 @@ function Cart() {
   return (
     <>
       <NavigationBar />
-      <div className="cart container-fluid">
-        <div className="cart-head text-center"> Your Cart </div>
-        <div className="cart-head-2">"{cartLength} Products in your Cart"</div>
-        <div className="place-ord-row">
-          {showBtn && (
-            <button
-              className="btn btn-primary place-ord-btn"
-              onClick={() => {
-                addOrder("---", 0, "");
-              }}
-              type="submit"
-            >
-              Place Order
-            </button>
-          )}
+      <div className="flex-box">
+        <SideBar />
+        <div className="cart container-fluid">
+          <div className="cart-head text-center"> Your Cart </div>
+          <div className="cart-head-2">
+            "{cartLength} Products in your Cart"
+          </div>
+          <div className="place-ord-row">
+            {showBtn && (
+              <button
+                className="btn btn-primary place-ord-btn"
+                onClick={() => {
+                  addOrder("---", 0, "");
+                }}
+                type="submit"
+              >
+                Place Order
+              </button>
+            )}
+          </div>
+          {console.log(radioSelect, "selected")}
+          <div className="main_content">{CartItems()}</div>
+          <IntercomModal
+            cartTitle={cart_title}
+            show={show}
+            addProduct={addOrder}
+            handleClose={handleClose}
+            setRadioSelect={setRadioSelect}
+          />
         </div>
-        {console.log(radioSelect, "selected")}
-        <div className="main_content">{CartItems()}</div>
-        <IntercomModal
-          cartTitle={cart_title}
-          show={show}
-          addProduct={addOrder}
-          handleClose={handleClose}
-          setRadioSelect={setRadioSelect}
-        />
       </div>
     </>
   );

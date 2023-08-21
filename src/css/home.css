@@ -30,13 +30,14 @@ body .nav-home {
 }
 
 .welcome {
-    width: 80%;
+    width: 50%;
     color: #ffff;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(51, 126, 215, 0.36);
-    padding: 5% 10% 5% 10%;
+    background-color: white;
+    /* padding: 5% 10% 5% 10%; */
     border-radius: 8px;
+    margin-top: auto;
 }
 
     .welcome .btn-primary {

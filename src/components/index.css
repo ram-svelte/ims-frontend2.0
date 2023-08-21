@@ -1,0 +1,8 @@
+.card-head{
+    display: flex;
+    flex-direction: column;
+  border-radius: 5px;
+}
+.card-title{
+    background: #212121;
+}

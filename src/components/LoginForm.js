@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
@@ -57,6 +59,54 @@ function LoginForm(props) {
     }
     setPasswordType("password");
   };
+
+  // useEffect(() => {
+  //   if (token) {
+  //     let decoded = jwt_decode(token);
+  //     localStorage.setItem("loggedUserName", decoded.uname);
+  //     localStorage.setItem("jwtToken", token);
+  //     // localStorage.setItem("app_type", response.data.show_app.app_switch);
+  //     const access_token = localStorage.getItem("jwtToken");
+  //     console.log(access_token,"dlhdgdhbhdb ")
+  //     const apiCall = async () => {
+  //       try {
+  //         const response = await axios.get(`${BASE_URL}/api/role`, {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         });
+  //         if (response.status === 200) {
+  //           if (response.data.data.length !== 0) {
+  //             console.log("response.data", response.data);
+  //             const role = response.data.data[0].role;
+  //             localStorage.setItem("role", role);
+  //             localStorage.setItem(
+  //               "user_type",
+  //               response.data.data[0].user_type
+  //             );
+  //             if (role === 2 || role === 3) {
+  //               props.onLogin();
+  //               history.push("/pendingorders");
+  //             } else if (role === 4) {
+  //               props.onLogin();
+  //               history.push("/approvedorders");
+  //             } else {
+  //               props.onLogout();
+
+  //               // Toaster("", "Access Denied");
+  //               // setAuthenticated(true)
+  //             }
+  //           } else {
+  //             props.onLogout();
+
+  //             // Toaster("", "Access Denied");
+  //             // setAuthErrorMsg(true);
+  //           }
+  //         }
+  //       } catch (error) {}
+  //     };
+  //     apiCall();
+  //   }
+  // }, [token]);
+
   const login = async () => {
     try {
       const request = data;
@@ -70,14 +120,14 @@ function LoginForm(props) {
       ) {
         setLoading(false);
         setPasswordError(response.data.message);
-        setLoading(true)
+        setLoading(true);
       } else if (response.status === 200) {
         const token = response.data.data;
         let decoded = jwt_decode(token);
-        sessionStorage.setItem("loggedUserName", decoded.uname);
-        sessionStorage.setItem("jwtToken", token);
-        sessionStorage.setItem("app_type", response.data.show_app.app_switch);
-        const access_token = sessionStorage.getItem("jwtToken");
+        localStorage.setItem("loggedUserName", decoded.uname);
+        localStorage.setItem("jwtToken", token);
+        localStorage.setItem("app_type", response.data.show_app.app_switch);
+        const access_token = localStorage.getItem("jwtToken");
         try {
           const response = await axios.get(`${BASE_URL}/api/role`, {
             headers: { Authorization: `Bearer ${access_token}` },
@@ -85,6 +135,11 @@ function LoginForm(props) {
           if (response.status === 200) {
             if (response.data.data.length !== 0) {
               const role = response.data.data[0].role;
+              localStorage.setItem(
+                "user_type",
+                response?.data?.data[0]?.user_type
+              );
+              localStorage.setItem("role", role);
               if (role === 1 || role === 3 || role === 4) {
                 props.onLogin();
                 setLoading(true);
@@ -117,67 +172,98 @@ function LoginForm(props) {
   };
 
   return (
-    <>
-      <div className="form-group">
-        <input
-          type="text"
-          value={userName}
-          onChange={userNameHandler}
-          className="form-control mb-4"
-          placeholder="Username"
-        />
+    <div className="welcome">
+      <div
+        style={{
+          background: "black",
+          width: "full",
+          borderRadius: "8px 8px 0px 0px",
+        }}
+      >
+        <h1 style={{ color: "white", padding: "5px 0px 0px 20px" }}>Welcome</h1>
+        <p
+          style={{
+            color: "#0083B7",
+            width: "80%",
+            padding: "5px 0px 5px 20px",
+            paddingBottom: "20px",
+            fontSize: "14px",
+          }}
+        >
+          Lorem ipsum dolor sit amet consectetur. Elit congue pretium sapien
+          cursus id odio ornare.
+        </p>
       </div>
-
-      <div className="form-group">
-        <div>
+      <div style={{ padding: "20px" }}>
+        <div className="form-group">
           <input
-            type={passwordType}
-            value={password}
-            name="password"
-            onChange={userPasswordHandler}
+            type="text"
+            value={userName}
+            onChange={userNameHandler}
             className="form-control mb-4"
-            id="exampleInputPassword1"
-            placeholder="Password"
+            placeholder="Username"
           />
         </div>
 
-        <span
-          className="btn"
-          onClick={togglePassword}
-          style={{
-            height: "38px",
-            width: "38px",
-            border: "0px",
-            float: "right",
-            padding: "0px",
-            marginTop: "-55px",
-          }}
-        >
-          {passwordType === "password" ? (
-            <FontAwesomeIcon icon={faEye} />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} />
-          )}
-        </span>
-      </div>
-      {loading ? (
-        <form onSubmit={formSubmitHandler}>
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </form>
-      ) : (
-        <div className="btn btn-primary">
-          <LoginLoadingSpinner />
-        </div>
-      )}
+        <div className="form-group">
+          <div>
+            <input
+              type={passwordType}
+              value={password}
+              name="password"
+              onChange={userPasswordHandler}
+              className="form-control mb-4"
+              id="exampleInputPassword1"
+              placeholder="Password"
+            />
+          </div>
 
-      {errorMsg && (
-        <p className="error_msg"> *Username/Password Is Incorrect</p>
-      )}
-      {authErrorMsg && <p className="error_msg"> *Access Denied</p>}
-      {passwordError && <p className="error_msg">{passwordError} </p>}
-    </>
+          <span
+            className="btn"
+            onClick={togglePassword}
+            style={{
+              height: "38px",
+              width: "38px",
+              border: "0px",
+              float: "right",
+              padding: "0px",
+              marginTop: "-55px",
+            }}
+          >
+            {passwordType === "password" ? (
+              <FontAwesomeIcon icon={faEye} />
+            ) : (
+              <FontAwesomeIcon icon={faEyeSlash} />
+            )}
+          </span>
+        </div>
+
+        {loading ? (
+          <form
+            style={{ display: "flex", justifyContent: "center" }}
+            onSubmit={formSubmitHandler}
+          >
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ width: "50%" }}
+            >
+              Login
+            </button>
+          </form>
+        ) : (
+          <div className="btn btn-primary">
+            <LoginLoadingSpinner />
+          </div>
+        )}
+
+        {errorMsg && (
+          <p className="error_msg"> *Username/Password Is Incorrect</p>
+        )}
+        {authErrorMsg && <p className="error_msg"> *Access Denied</p>}
+        {passwordError && <p className="error_msg">{passwordError} </p>}
+      </div>
+    </div>
   );
 }
 

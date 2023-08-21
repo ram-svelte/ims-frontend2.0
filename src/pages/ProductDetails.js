@@ -7,22 +7,23 @@ import ProductDetailsList from "../components/ProductDetailsList";
 import NavigationBar from "../UI/NavigationBar";
 import { currentPath } from "../redux/action";
 import { useDispatch } from "react-redux";
+import SideBar from "../UI/sideBar";
 
 function ProductDetails() {
   const [items, setItems] = useState([]);
   const params = useParams();
   const dispatch = useDispatch();
   const { isLoading, error, sendRequest: fetchProductDetail } = useHttp();
-  const access_token = sessionStorage.getItem("jwtToken");
-  //storing currentUrl to sessionStorage
+  const access_token = localStorage.getItem("jwtToken");
+  //storing currentUrl to localStorage
   const currentUrl = window.location.href;
   const splitUrl = currentUrl.split("/");
   if (currentUrl.includes("?")) {
     const newUrl = splitUrl[3].split("?");
-    sessionStorage.setItem("currentUrl", newUrl[0]);
+    localStorage.setItem("currentUrl", newUrl[0]);
     dispatch(currentPath(newUrl[0]));
   } else {
-    sessionStorage.setItem("currentUrl", splitUrl[3]);
+    localStorage.setItem("currentUrl", splitUrl[3]);
     dispatch(currentPath(splitUrl[3]));
   }
 
@@ -69,8 +70,17 @@ function ProductDetails() {
   return (
     <>
       <NavigationBar />
-      <div>
-        <div>{productItems}</div>
+      <div className="flex-box">
+        <SideBar />
+        <div
+          style={{
+            background: "rgb(0, 131, 183)",
+            height: "100vh",
+            width: "100%",
+          }}
+        >
+          <div>{productItems}</div>
+        </div>
       </div>
     </>
   );

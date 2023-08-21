@@ -27,7 +27,7 @@ import history from "../../Utils/history";
 //const history = useHistory();
 
 export const fetchUsersCart = () => {
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   return (dispatch) => {
     dispatch(fetchUsersCartRequest());
     axios
@@ -84,7 +84,7 @@ export const fetchUsersCartFailure = (error) => {
 //fetch all branch api on user portal
 
 export const fetchAllBranch = () => {
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   return (dispatch) => {
     dispatch(fetchAllBranchRequest());
     axios
@@ -131,7 +131,7 @@ export const fetchAllBranchFailure = (error) => {
 //fetch all Computers & Peripherals Products ------Start
 
 export const fetchAllCompProds = () => {
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   return (dispatch) => {
     dispatch(fetchAllCompProdsRequest());
     axios
@@ -177,7 +177,7 @@ export const fetchAllCompProdsFailure = (error) => {
 //fetch all Computers & Peripherals Products ------Ends
 
 export const fetchUsersProfile = () => {
-  const access_token = sessionStorage.getItem("jwtToken");
+  const access_token = localStorage.getItem("jwtToken");
   return (dispatch) => {
     dispatch(fetchUsersProfileRequest());
     axios
@@ -191,18 +191,18 @@ export const fetchUsersProfile = () => {
           designation: userItems.designation,
           branch: userItems.designations[0].branch,
         });
-        sessionStorage.setItem("userBranch", laodedItems[0].branch);
-        sessionStorage.setItem("userDesignation", laodedItems[0].designation);
+        localStorage.setItem("userBranch", laodedItems[0].branch);
+        localStorage.setItem("userDesignation", laodedItems[0].designation);
 
         dispatch(fetchUsersProfileSuccess(laodedItems));
       })
       .catch((error) => {
         console.log("in error block of userprofile");
-        // sessionStorage.removeItem("isLoggedIn");
-        // sessionStorage.removeItem("loggedUserName");
-        // sessionStorage.removeItem("jwtToken");
-        // sessionStorage.removeItem("userBranch");
-        // sessionStorage.removeItem("userDesignation");
+        // localStorage.removeItem("isLoggedIn");
+        // localStorage.removeItem("loggedUserName");
+        // localStorage.removeItem("jwtToken");
+        // localStorage.removeItem("userBranch");
+        // localStorage.removeItem("userDesignation");
 
         dispatch(fetchUsersProfileFailure(error.message));
         // history.push("/");
@@ -230,7 +230,7 @@ export const fetchUsersProfileFailure = (error) => {
   };
 };
 
-// action for storing currentURl to sessionStorage
+// action for storing currentURl to localStorage
 
 export const currentPath = (url) => {
   return {
@@ -240,8 +240,8 @@ export const currentPath = (url) => {
 };
 
 export const addCart = (product) => {
-  const cart = sessionStorage.getItem("cart")
-    ? JSON.parse(sessionStorage.getItem("cart"))
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
     : [];
 
   //For Duplicates
@@ -253,7 +253,7 @@ export const addCart = (product) => {
       count: 1,
     };
     cart.push(prodToAdd);
-    sessionStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 
   return {

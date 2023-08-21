@@ -1,0 +1,9 @@
+.heading-cate{
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+.flex-box{
+    display: flex;
+}

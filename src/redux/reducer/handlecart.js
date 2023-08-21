@@ -91,8 +91,8 @@ export default handleCart;
 //   error: "",
 // };
 
-// if (sessionStorage.getItem("cartItemArray")) {
-//   initialState.cart = JSON.parse(sessionStorage.getItem("cartItemArray"));
+// if (localStorage.getItem("cartItemArray")) {
+//   initialState.cart = JSON.parse(localStorage.getItem("cartItemArray"));
 // } else {
 //   initialState.cart = [];
 // }

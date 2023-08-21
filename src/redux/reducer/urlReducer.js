@@ -1,7 +1,7 @@
 import { SET_URL } from "../types";
 
 const initialState = {
-  url: sessionStorage.getItem("currentUrl"),
+  url: localStorage.getItem("currentUrl"),
 };
 
 const handleUrl = (state = initialState, action) => {
